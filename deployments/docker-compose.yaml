@@ -1,0 +1,38 @@
+version: "3.8"
+services:
+  db:
+    environment:
+     - POSTGRES_USER=fapituto
+     - POSTGRES_PASSWORD=fapituto_pass
+    image: postgres:13
+    volumes:
+      - db-data:/var/lib/postgresql/data
+      # - ${PWD}/deployments/postgres:/docker-entrypoint-initdb.d
+    networks:
+      - dev
+    ports:
+      - 5432:5432
+  # flaskr:
+  #   build: 
+  #     context: ../
+  #     dockerfile: deployments/Dockerfile_flaskr
+  #     args: 
+  #       ENVIRONMENT: developement
+  #   volumes:
+  #     - $PWD:/opt/flaskr
+  #   depends_on:
+  #     - db
+  #   environment:
+  #   - FLASK_APP=flaskr
+  #   - FLASK_ENV=development
+  #   - OTELE_TRACE=True
+  #   networks:
+  #     - dev
+  #   ports:
+  #     - 5000:5000
+
+networks:
+  dev:
+
+volumes:
+  db-data:

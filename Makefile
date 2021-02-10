@@ -25,7 +25,7 @@ up-backend: up-db
 	$(DC_EXEC) -f $(DC_DIR)/$(DC_APP) up --remove-orphans -d backend
 
 up-db:
-	$(DC_EXEC) -f $(DC_DIR)/$(DC_APP) up --remove-orphans -d db
+	$(DC_EXEC) -f $(DC_DIR)/$(DC_APP) up --remove-orphans -d db-fapi-blog
 
 down:
 	$(DC_EXEC) -f $(DC_DIR)/$(DC_APP) down --remove-orphans 

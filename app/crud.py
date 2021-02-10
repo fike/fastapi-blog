@@ -9,9 +9,9 @@ def create_post(db: Session, post: schemas.PostCreate):
     return db_post
     
 def get_all(
-    db: Session, skip: int = 0, limit: int = 100
+    db: Session, offset: int = 0, limit: int = 100
     ) -> list:
-    posts = db.query(models.Post).order_by(models.Post.id.asc()).offset(skip).limit(limit).all()
+    posts = db.query(models.Post).order_by(models.Post.id.asc()).offset(offset).limit(limit).all()
     return posts
 
 def count_posts(

@@ -20,7 +20,7 @@ COPY poetry.lock /opt/blog/backend/
 
 COPY pyproject.toml /opt/blog/backend/
 
-COPY deployments/fastapi/fapi-init.sh /usr/local/bin/
+COPY deployments/scripts/fapi-init.sh /usr/local/bin/fapi-init.sh
 
 RUN poetry config virtualenvs.create false &&\
     poetry install $(test ${ENVIRONMENT} = "production" && echo "--no-dev") --no-interaction --no-ansi 

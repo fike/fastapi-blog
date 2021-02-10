@@ -18,8 +18,8 @@ services:
       dockerfile: deployments/Dockerfile_backend_dev
       args: 
         ENVIRONMENT: development
-    # volumes:
-    #   - $PWD:/opt/blog/backend
+    volumes:
+      - $PWD:/opt/blog/backend
     depends_on:
       - db-fapi-blog
     environment:

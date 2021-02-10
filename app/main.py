@@ -55,10 +55,11 @@ def create_post(
 
 # TODO: pagination 
 @app.get("/posts/", response_model=List[schemas.Post], tags=["posts"])
-def list_posts(response: Response, db: Session = Depends(get_db), skip: int = 0, limit: int = 100) -> Any:
-    posts = crud.get_all(db=db, skip=skip, limit=limit)
+def list_posts(response: Response, db: Session = Depends(get_db), offset: int = 0, limit: int = 30) -> Any:
+    posts = crud.get_all(db=db, offset=offset, limit=limit)
     total_posts = crud.count_posts(db=db)
     response.headers["X-Total-Posts"] = str(total_posts)
+
     return posts
 
 

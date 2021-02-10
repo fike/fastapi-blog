@@ -1,5 +1,6 @@
-deployments
+deployments*
 .pytest_cache*
 htmlcov
 *.pyc
 __pycache__
+!deployments/scripts/fapi-init.sh

@@ -1,0 +1,34 @@
+version: "3.8"
+services:
+  db-test:
+    environment:
+     - POSTGRES_USER=test
+     - POSTGRES_PASSWORD=test
+     - POSTGRES_DB=test_app
+    image: postgres:13
+    networks:
+      - test
+    ports:
+      - 5433:5432
+  backend:
+    build: 
+      context: ../
+      dockerfile: deployments/Dockerfile_backend_
+      args: 
+        ENVIRONMENT: development
+    volumes:
+      - $PWD:/opt/blog/backend
+    depends_on:
+      - db-test
+    environment:
+      - ENVIRONMENT=development
+      - SQLALCHEMY_DATABASE_URI=postgresql://test:test@db-test:5432/test_app
+      - OTELE_TRACE=False
+    networks:
+      - test
+    restart: always
+    ports:
+      - 8000:8000
+
+networks:
+  test:

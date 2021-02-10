@@ -1,12 +1,10 @@
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-SQLALCHEMY_DATABASE_URI = "postgresql://fapituto:fapituto_pass@localhost/fapituto"
+from app.config import settings 
 
-engine = create_engine(
-    SQLALCHEMY_DATABASE_URI
-)
+engine = create_engine(settings.SQLALCHEMY_DATABASE_URI, pool_pre_ping=True)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 Base = declarative_base()

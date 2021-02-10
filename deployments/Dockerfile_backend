@@ -1,0 +1,35 @@
+FROM python:3.9-slim
+
+ARG ENVIRONMENT
+
+ENV ENVIRONMENT=${ENVIRONMENT} \
+    PYTHONFAULTHANDLER=1 \
+    PYTHONUNBUFFERED=1 \
+    PYTHONHASHSEED=random \
+    PIP_NO_CACHE_DIR=off \
+    PIP_DISABLE_PIP_VERSION_CHECK=on \
+    PIP_DEFAULT_TIMEOUT=100 \
+    POETRY_VERSION=1.1.4 \
+    PYTHONPATH=/opt/blog/backend
+
+RUN apt update && \
+    apt install -y libpq-dev gcc &&\
+    pip install "poetry==${POETRY_VERSION}" 
+
+WORKDIR /opt/blog/backend
+
+COPY poetry.lock /opt/blog/backend/
+
+COPY pyproject.toml /opt/blog/backend/
+
+COPY deployments/fastapi/fapi-init.sh /opt/blog/backend/
+
+RUN poetry config virtualenvs.create false &&\
+    poetry install $(test ${ENVIRONMENT} = "production" && echo "--no-dev") --no-interaction --no-ansi && \
+    apt purge -y gcc
+
+COPY . .
+
+EXPOSE 8000
+
+# ENTRYPOINT uvicorn app.main:app --host=0.0.0.0 $(test ${ENVIRONMENT} = "development" && echo "--reload")

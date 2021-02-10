@@ -1,0 +1,5 @@
+deployments
+.pytest_cache*
+htmlcov
+*.pyc
+__pycache__

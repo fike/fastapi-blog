@@ -9,30 +9,38 @@ services:
     volumes:
       - db-data:/var/lib/postgresql/data
     networks:
-      - fapi_blog
+      - dev
     ports:
       - 5432:5432
   backend:
     build: 
       context: ../
-      dockerfile: deployments/Dockerfile_backend
+      dockerfile: deployments/Dockerfile_backend_dev
       args: 
-        ENVIRONMENT: production
-    volumes:
-      - $PWD:/opt/blog/backend
+        ENVIRONMENT: development
+    # volumes:
+    #   - $PWD:/opt/blog/backend
     depends_on:
       - db-fapi-blog
     environment:
-      - ENVIRONMENT=production
+      - ENVIRONMENT=development
       - SQLALCHEMY_DATABASE_URI=postgresql://fapi_blog:fapi_pass@db-fapi-blog:5432/fapi_blog
-      - OTELE_TRACE=False
+      # - OTELE_TRACE=True
     networks:
-      - fapi_blog
+      - dev
     ports:
       - 8000:8000
+    restart: always
+  jaeger-server:
+    image: jaegertracing/all-in-one
+    networks:
+      - dev
+    ports:
+      - 16686:16686
+      - 6831:6831/udp
 
 networks:
-  fapi_blog:
+  dev:
 
 volumes:
   db-data:

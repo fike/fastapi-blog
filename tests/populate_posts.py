@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 
-import requests
 import json
 
+import requests
 from opentelemetry import trace
 from opentelemetry.exporter import jaeger
+from opentelemetry.instrumentation.requests import RequestsInstrumentor
 from opentelemetry.sdk.trace import TracerProvider
 from opentelemetry.sdk.trace.export import BatchExportSpanProcessor
-from opentelemetry.instrumentation.requests import RequestsInstrumentor
 
 trace.set_tracer_provider(TracerProvider())
 tracer = trace.get_tracer_provider().get_tracer(__name__)

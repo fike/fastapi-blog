@@ -1,4 +1,5 @@
 from typing import Any
+
 from sqlalchemy.ext.declarative import as_declarative, declared_attr
 
 # It's used to create tables "normalized".
@@ -8,5 +9,3 @@ from sqlalchemy.ext.declarative import as_declarative, declared_attr
 class Base:
     id: Any
     __name__: str
-
-

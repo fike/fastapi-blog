@@ -1,25 +1,20 @@
 from typing import Any
 
 from fastapi import Depends, FastAPI, Response
-from sqlalchemy.orm import Session
-from starlette.status import HTTP_201_CREATED
 from fastapi_pagination import Page, pagination_params
 from fastapi_pagination.ext.sqlalchemy import paginate
-
 from opentelemetry import trace
 from opentelemetry.exporter import jaeger
-from opentelemetry.sdk.trace import TracerProvider
-from opentelemetry.sdk.trace.export import BatchExportSpanProcessor
 from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
 from opentelemetry.instrumentation.sqlalchemy import SQLAlchemyInstrumentor
+from opentelemetry.sdk.trace import TracerProvider
+from opentelemetry.sdk.trace.export import BatchExportSpanProcessor
+from sqlalchemy.orm import Session
+from starlette.status import HTTP_201_CREATED
 
-from . import crud, schemas, models
-from .schemas import (
-    PostCreate,
-    # ListPostsResponse
-)
-
+from . import crud, models, schemas
 from .db.session import SessionLocal, engine
+from .schemas import PostCreate  # ListPostsResponse
 
 trace.set_tracer_provider(TracerProvider())
 trace_exporter = jaeger.JaegerSpanExporter(

@@ -1,4 +1,5 @@
 deployments*
+.vscode
 .pytest_cache*
 htmlcov
 *.pyc

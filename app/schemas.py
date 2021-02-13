@@ -1,13 +1,15 @@
-from typing import List, Optional
+from typing import Optional
 from pydantic import BaseModel, validator
+
 
 class HTTPError(BaseModel):
     detail: str
 
+
 class PostBase(BaseModel):
-    # title: Optional[str] = None
     title: str
     body: str
+
 
 class PostCreate(PostBase):
 
@@ -25,9 +27,13 @@ class PostCreate(PostBase):
             raise ValueError("Body can't be empty")
         return body
 
+
 class Post(PostBase):
     id: Optional[int] = None
 
     class Config:
         orm_mode = True
 
+
+class Posts(Post):
+    pass

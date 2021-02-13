@@ -13,9 +13,6 @@ fastapi = "^0.63.0"
 uvicorn = "^0.13.3"
 psycopg2 = "^2.8.6"
 requests = "^2.25.1"
-coverage = "^5.3.1"
-pytest = "^6.2.1"
-pylint = "^2.6.0"
 opentelemetry-instrumentation-fastapi = "^0.17b0"
 opentelemetry-exporter-jaeger = "^0.17b0"
 opentelemetry-sdk = "^0.17b0"
@@ -23,11 +20,16 @@ opentelemetry-api = "^0.17b0"
 opentelemetry-instrumentation-psycopg2 = "^0.17b0"
 opentelemetry-instrumentation-starlette = "^0.17b0"
 opentelemetry-instrumentation-sqlalchemy = "^0.17b0"
+opentelemetry-instrumentation-requests = "^0.17b0"
+fastapi-pagination = "^0.5.2"
+
 
 [tool.poetry.dev-dependencies]
 autopep8 = "^1.5.5"
-
-
+coverage = "^5.3.1"
+pytest = "^6.2.1"
+pylint = "^2.6.0"
+flake8 = "^3.8.4"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

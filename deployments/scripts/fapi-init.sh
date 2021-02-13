@@ -13,7 +13,7 @@ alembic upgrade head
 # if [ $OTELE_TRACE = "True" ]
 # then
 #     echo "Running with OpenTelemetry"
-#     opentelemetry-instrument uvicorn app.main:app --host=0.0.0.0 $(test ${ENVIRONMENT} = "development" && echo "--reload")
+    # opentelemetry-instrument -e none uvicorn app.main:app --host=0.0.0.0 $(test ${ENVIRONMENT} = "development" && echo "--reload")
 # else
 #     echo "OpenTelemetry isn't enable"
 uvicorn app.main:app --host=0.0.0.0 $(test ${ENVIRONMENT} = "development" && echo "--reload")

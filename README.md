@@ -27,13 +27,13 @@ make test-local
 
 ## TODO
 
-* Pagination
+* ~~Pagination~~
 * Run tests in container
 * Autentication
 * Implement UI (React)
 * Helm Chart
 * Improvement tests with tox
 * Implement a default path (**/api**)
-* Hard LIMIT clause when get all posts
+* Custom Limit and Offset
 * Add script to ingest samples
 * CI tests

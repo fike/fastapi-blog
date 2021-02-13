@@ -10,12 +10,14 @@ DC_APP_DEV := docker-compose-dev.yaml
 
 DC_APP_TEST := docker-compose-test.yaml
 
+export DOCKER_BUILDKIT := true
+export COMPOSE_DOCKER_CLI_BUILD=true
 
 logs:
 	$(DC_EXEC) -f $(DC_DIR)/$(DC_APP) logs -f
 
 
-dev-up: 
+dev-up:
 	$(DC_EXEC) -f $(DC_DIR)/$(DC_APP_DEV) up --remove-orphans --build
 
 dev-down: 

@@ -18,8 +18,6 @@ def get_all(
     return posts
 
 
-def count_posts(
-    db: Session
-) -> int:
+def count_posts(db: Session) -> int:
     total = db.query(models.Post).count()
     return total

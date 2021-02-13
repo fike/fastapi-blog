@@ -13,7 +13,6 @@ class PostBase(BaseModel):
 
 
 class PostCreate(PostBase):
-
     @validator("title")
     def validate_title(cls, title: str, **kwargs):
         if len(title) == 0:

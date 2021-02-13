@@ -11,7 +11,6 @@ from app.models import Post
 # from sqlalchemy.orm import Session
 
 
-
 @pytest.fixture(scope="session")
 def db():
     yield SessionLocal()

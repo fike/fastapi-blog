@@ -17,32 +17,20 @@ trace_exporter = jaeger.JaegerSpanExporter(
     agent_host_name="localhost",
     agent_port=6831,
 )
-trace.get_tracer_provider().add_span_processor(
-    BatchExportSpanProcessor(trace_exporter)
-)
+trace.get_tracer_provider().add_span_processor(BatchExportSpanProcessor(trace_exporter))
 
 RequestsInstrumentor().instrument()
 
-post_template = dict({
-    "title": "Title Foo",
-    "body": "Body foobar"
-})
+post_template = dict({"title": "Title Foo", "body": "Body foobar"})
 
-url = 'http://localhost:8000/posts/'
+url = "http://localhost:8000/posts/"
 
 
 for i in range(1, 300):
     headers = {}
     post_title = str(post_template["title"] + str(i))
     post_body = str(post_template["body"] + str(i))
-    post_req = json.dumps(
-        dict(
-            {
-                "title": post_title,
-                "body": post_body
-            }
-        )
-    )
+    post_req = json.dumps(dict({"title": post_title, "body": post_body}))
     resp = requests.post(url, data=post_req, headers=headers)
     print(resp.text)
 

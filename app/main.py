@@ -22,9 +22,7 @@ trace_exporter = jaeger.JaegerSpanExporter(
     agent_host_name="jaeger-server",
     agent_port=6831,
 )
-trace.get_tracer_provider().add_span_processor(
-    BatchExportSpanProcessor(trace_exporter)
-)
+trace.get_tracer_provider().add_span_processor(BatchExportSpanProcessor(trace_exporter))
 
 
 # Create database tables to start
@@ -45,23 +43,13 @@ def get_db():
         db.close()
 
 
-@app.post(
-    "/posts/",
-    response_model=schemas.Post,
-    status_code=HTTP_201_CREATED,
-    tags=["posts"]
-)
-def create_post(
-    post: PostCreate, db: Session = Depends(get_db)
-):
+@app.post("/posts/", response_model=schemas.Post, status_code=HTTP_201_CREATED, tags=["posts"])
+def create_post(post: PostCreate, db: Session = Depends(get_db)):
     result = crud.create_post(db=db, post=post)
     return result
 
 
-@app.get("/posts/",
-         response_model=Page[schemas.Posts],
-         dependencies=[Depends(pagination_params)]
-         )
+@app.get("/posts/", response_model=Page[schemas.Posts], dependencies=[Depends(pagination_params)])
 def list_posts(response: Response, db: Session = Depends(get_db)) -> Any:
     posts = crud.get_all(db=db)
     total_posts = crud.count_posts(db=db)

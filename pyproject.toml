@@ -12,7 +12,6 @@ alembic = "^1.4.3"
 fastapi = "^0.63.0"
 uvicorn = "^0.13.3"
 psycopg2 = "^2.8.6"
-requests = "^2.25.1"
 opentelemetry-instrumentation-fastapi = "^0.17b0"
 opentelemetry-exporter-jaeger = "^0.17b0"
 opentelemetry-sdk = "^0.17b0"
@@ -30,7 +29,34 @@ coverage = "^5.3.1"
 pytest = "^6.2.1"
 pylint = "^2.6.0"
 flake8 = "^3.8.4"
+requests = "^2.25.1"
+black = "^20.8b1"
+pre-commit = "^2.8.2"
+
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 120
+target-version = ['py37', 'py38']
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+  # The following are specific to Black, you probably don't want those.
+  | blib2to3
+  | tests/data
+  | profiling
+)/
+'''

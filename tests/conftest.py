@@ -1,13 +1,14 @@
 from typing import Generator
+
 import pytest
 from fastapi.testclient import TestClient
-# from sqlalchemy.orm import Session
 
-from app.main import get_db
 # from app.config import settings
 from app.db.session import SessionLocal
-from app.main import app
+from app.main import app, get_db
 from app.models import Post
+
+# from sqlalchemy.orm import Session
 
 
 @pytest.fixture(scope="session")

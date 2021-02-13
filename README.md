@@ -10,20 +10,31 @@ This a FastAPI project for blog backend to learn purpose.
 * Docker
 * Docker-Compose
 * Jaeger
+* Make
 
 ## How to use
 
-To run and use needs to have make installed too. I'm sure if makefile run in Powershell, probably will run if you have WSL2 installed.
+Use make command to run inside a docker container, it'll expose the port 8000 and access using URL: `http://localhost:8000`. I'm not sure if a makefile run in the Powershell, probably yes but I suggest to use [WSL2](https://docs.microsoft.com/windows/wsl/install-win10).
+
+**Up and run**:
 
 ```bash
 make dev-up
 ```
 
-To run tests will up a postgresql container and expose 5432 port to populate, The report will write in htmlcov dir.
+This repo is instrumented by OpenTelemtry and export metric to Jaeger that start together the app by Docker-Compose, to access: `http://localhost:16686/`
+
+### Tests
+
+To run tests will up a postgresql container and expose 5432 port to populate. The report will write in htmlcov dir.
 
 ```bash
 make test-local
 ```
+
+## Known issues
+
+* Some Opentelemetry warnings will show when tests ran.
 
 ## TODO
 

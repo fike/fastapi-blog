@@ -1,5 +1,6 @@
 from sqlalchemy.orm import Session
 
+# from . import models, schemas  # type: ignore
 from . import models, schemas
 
 
@@ -12,7 +13,7 @@ def create_post(db: Session, post: schemas.PostCreate):
 
 
 def get_all(
-    db: Session,  # offset: int = 0, limit: int = 100
+    db: Session,
 ) -> list:
     posts = db.query(models.Post)
     return posts

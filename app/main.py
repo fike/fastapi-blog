@@ -43,7 +43,7 @@ def get_db():
         db.close()
 
 
-@app.post("/posts/", response_model=schemas.Post, status_code=HTTP_201_CREATED, tags=["posts"])
+@app.post("/posts/", response_model=schemas.Post, status_code=HTTP_201_CREATED)
 def create_post(post: PostCreate, db: Session = Depends(get_db)):
     result = crud.create_post(db=db, post=post)
     return result

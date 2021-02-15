@@ -47,7 +47,8 @@ test-app:
 
 test-local: test-up-db test-commons
 	sleep 3
-	coverage run -m pytest
-	coverage report
-	coverage html 
+	poetry run coverage run -m pytest
+	poetry run coverage report
+	poetry run coverage xml
+	poetry run coverage html 
 	$(DC_EXEC) -f $(DC_DIR)/$(DC_APP_TEST) down --remove-orphans -v --rmi local

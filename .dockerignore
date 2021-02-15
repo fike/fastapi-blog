@@ -4,4 +4,5 @@ deployments*
 htmlcov
 *.pyc
 __pycache__
-!deployments/scripts/fapi-init.sh
+.coverage
+!deployments/entrypoints/*

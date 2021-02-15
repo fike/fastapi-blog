@@ -13,7 +13,7 @@ services:
   backend:
     build: 
       context: ../
-      dockerfile: deployments/Dockerfile_backend_
+      dockerfile: deployments/Dockerfile_backend
       args: 
         ENVIRONMENT: development
     volumes:

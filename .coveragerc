@@ -1,3 +1,3 @@
 [run]
 branch = True
-omit = */tests/*, */.venv/*,  */__init__.py ,
+omit = */tests/*, */.venv/*,  */__init__.py , */virtualenvs/*, */.cache/*

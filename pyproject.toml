@@ -21,6 +21,7 @@ opentelemetry-instrumentation-starlette = "^0.17b0"
 opentelemetry-instrumentation-sqlalchemy = "^0.17b0"
 opentelemetry-instrumentation-requests = "^0.17b0"
 fastapi-pagination = "^0.5.2"
+python-slugify = "^4.0.1"
 
 
 [tool.poetry.dev-dependencies]

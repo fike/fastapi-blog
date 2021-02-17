@@ -4,9 +4,9 @@ from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from app.db.base import Base
+from app.db.base import Base, get_db
 from app.db.session import engine
-from app.main import app, get_db
+from app.main import app
 
 TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
@@ -37,12 +37,25 @@ client = TestClient(app)
 )
 def test_create_post(title_header, title_value, body_header, body_value, status):
     response = client.post(
-        "/posts/",
+        "/api/posts",
         json={title_header: title_value, body_header: body_value},
     )
     assert status == response.status_code
 
 
-def test_get_post():
-    response = client.get("/posts/")
+def test_get_posts():
+    response = client.get("/api/posts")
     assert 200 == response.status_code
+
+
+@pytest.mark.parametrize(
+    ("slug", "status"),
+    (
+        ("test-title-blog-1", 200),
+        ("test-title-blog-2", 404),
+    ),
+)
+def test_get_post(slug, status):
+    print("/api/posts/{slug}")
+    response = client.get(f"/api/posts/{slug}")
+    assert status == response.status_code

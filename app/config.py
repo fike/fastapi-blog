@@ -1,11 +1,11 @@
-from typing import Any, Dict, Optional, Union
+from typing import Optional
 
-from pydantic import PostgresDsn, validator
+from pydantic import PostgresDsn
 from pydantic.env_settings import BaseSettings
 
 
 class Settings(BaseSettings):
-    SQLALCHEMY_DATABASE_URI: Optional[PostgresDsn] = None
+    SQLALCHEMY_DATABASE_URI: Optional[PostgresDsn]
 
 
 settings = Settings()

@@ -5,8 +5,6 @@ sleep 2
 
 export PYTHONPATH=/opt/blog/backend
 
-echo $SQLALCHEMY_DATABASE_URI
-
 alembic upgrade head
 
 # Disabled opentelemetry-instrument with opentelemetry-instrumentation-sqlalchemy brake DefaultTraceProvider

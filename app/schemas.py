@@ -1,6 +1,8 @@
+from datetime import datetime
 from typing import Optional
 
-from pydantic import BaseModel, validator
+from pydantic import BaseModel, SecretStr, validator
+from sqlalchemy.sql.sqltypes import DateTime, String
 
 
 class HTTPError(BaseModel):
@@ -10,6 +12,7 @@ class HTTPError(BaseModel):
 class PostBase(BaseModel):
     title: str
     body: str
+    # author_id: str
 
 
 class PostCreate(PostBase):
@@ -30,6 +33,8 @@ class PostCreate(PostBase):
 
 class Post(PostBase):
     id: Optional[int] = None
+    published: datetime = None
+    slug: str = None
 
     class Config:
         orm_mode = True
@@ -37,3 +42,13 @@ class Post(PostBase):
 
 class Posts(Post):
     pass
+
+
+class UserBase(BaseModel):
+    username: str
+    password: SecretStr
+    profile: str
+
+
+class User(UserBase):
+    id: Optional[int] = None

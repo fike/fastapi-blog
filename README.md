@@ -1,3 +1,9 @@
+<p align="left">
+<a href="https://github.com/fike/fastapi-blog/actions?query=workflow%3ATests" target="_blank">
+    <img src="https://github.com/fike/fastapi-blog/workflows/Tests/badge.svg" alt="Test">
+</a>
+
+
 # A FastAPI sample
 
 This a FastAPI project for blog backend to learn purpose.
@@ -44,7 +50,7 @@ make test-local
 * Implement UI (React)
 * Helm Chart
 * Improvement tests with tox
-* Implement a default path (**/api**)
+* ~~Implement a default path (**/api**)~~
 * Custom Limit and Offset
 * Add script to ingest samples
-* CI tests
+* ~~CI tests~~

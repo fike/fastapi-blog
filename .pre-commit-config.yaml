@@ -4,12 +4,14 @@ repos:
     hooks:
       - id: seed-isort-config
 
-  - repo: https://github.com/pre-commit/mirrors-isort
-    rev: v5.6.4
+  - repo: https://github.com/pycqa/isort
+    rev: 5.6.4
     hooks:
       - id: isort
+        args: ["--profile", "black", "--filter-files"]
 
-  - repo: https://github.com/ambv/black
+
+  - repo: https://github.com/psf/black
     rev: 20.8b1
     hooks:
       - id: black

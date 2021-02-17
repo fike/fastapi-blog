@@ -3,9 +3,11 @@ from typing import Generator
 import pytest
 from fastapi.testclient import TestClient
 
+from app.db.base import get_db
+
 # from app.config import settings
 from app.db.session import SessionLocal
-from app.main import app, get_db
+from app.main import app
 from app.models import Post
 
 # from sqlalchemy.orm import Session

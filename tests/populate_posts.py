@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 
 import json
+import time
+from datetime import datetime
 
 import requests
 from opentelemetry import trace
@@ -23,15 +25,16 @@ RequestsInstrumentor().instrument()
 
 post_template = dict({"title": "Title Foo", "body": "Body foobar"})
 
-url = "http://localhost:8000/posts/"
+url = "http://localhost:8000/api/posts"
 
 
 for i in range(1, 300):
     headers = {}
-    post_title = str(post_template["title"] + str(i))
-    post_body = str(post_template["body"] + str(i))
+    date_txt = datetime.now()
+    post_title = str(post_template["title"] + "\n" + date_txt.strftime("%Y/%m/%d - %H:%m:%S"))
+    post_body = str(post_template["body"] + "\n" + date_txt.strftime("%Y/%m/%d - %H:%m:%S"))
     post_req = json.dumps(dict({"title": post_title, "body": post_body}))
     resp = requests.post(url, data=post_req, headers=headers)
     print(resp.text)
-
+    time.sleep(1)
     assert resp.status_code == 201

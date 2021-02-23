@@ -22,12 +22,16 @@ opentelemetry-instrumentation-sqlalchemy = "^0.17b0"
 opentelemetry-instrumentation-requests = "^0.17b0"
 fastapi-pagination = "^0.5.2"
 python-slugify = "^4.0.1"
+passlib = "^1.7.4"
+python-jose = "^3.2.0"
+python-multipart = "^0.0.5"
 
 
 [tool.poetry.dev-dependencies]
 autopep8 = "^1.5.5"
 coverage = "^5.3.1"
 pytest = "^6.2.1"
+pytest-order = "^0.9.5"
 pylint = "^2.6.0"
 flake8 = "^3.8.4"
 requests = "^2.25.1"
@@ -61,3 +65,9 @@ exclude = '''
   | profiling
 )/
 '''
+
+[tool.isort]
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+known_third_party = ["alembic", "fastapi", "fastapi_pagination", "jose", "opentelemetry", "passlib", "pydantic", "pytest", "requests", "slugify", "sqlalchemy", "starlette"]

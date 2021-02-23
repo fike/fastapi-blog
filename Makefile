@@ -21,6 +21,9 @@ dev-up:
 dev-down: 
 	$(DC_EXEC) -f $(DC_DIR)/$(DC_APP_DEV) down 
 
+dev-logs:
+	$(DC_EXEC) -f $(DC_DIR)/$(DC_APP) logs -f
+
 backend-up: db-up
 	$(DC_EXEC) -f $(DC_DIR)/$(DC_APP_DEV) kill backend
 	$(DC_EXEC) -f $(DC_DIR)/$(DC_APP_DEV) up --remove-orphans -d backend
@@ -44,6 +47,9 @@ migrate: test-commons test-db-up
 pre-commint: 
 	poetry run pre-commit run --all-files --show-diff-on-failure
 
+test-populate:
+	opentelemetry-instrument tests/populate_posts.py
+
 test-db-up:
 	$(DC_EXEC) -f $(DC_DIR)/$(DC_APP_TEST) up --remove-orphans -d db-test
 
@@ -57,10 +63,10 @@ export SQLALCHEMY_DATABASE_URI := postgresql://test:test@localhost:5433/test_app
 test-app:
 	$(DC_EXEC) -f $(DC_DIR)/$(DC_APP_DEV) up --remove-orphans -d backend
 
-test-local: test-db-up test-commons
+test-local: test-down clean test-db-up test-commons
 	sleep 3
-	poetry run coverage run -m pytest
+	poetry run coverage run -m pytest -vv
 	poetry run coverage report
 	poetry run coverage xml
 	poetry run coverage html 
-	$(DC_EXEC) -f $(DC_DIR)/$(DC_APP_TEST) down --remove-orphans -v --rmi local
+	# $(DC_EXEC) -f $(DC_DIR)/$(DC_APP_TEST) down --remove-orphans -v --rmi local

@@ -1,15 +1,20 @@
 from os import environ
+from sys import prefix
 from typing import Any
 
 from fastapi import FastAPI
+from sqlalchemy.sql.functions import user
+from starlette.responses import RedirectResponse
 from starlette.status import HTTP_201_CREATED
 
-from . import models
+from app import models
+from app.routers import users
+
 from .db.session import engine
 from .routers import posts
 
 # Create database tables to start
-models.Base.metadata.create_all(bind=engine)
+# models.Base.metadata.create_all(bind=engine)
 
 
 app = FastAPI(title="FastAPI Blog Backend")
@@ -38,5 +43,5 @@ if otel_trace == "True":  # pragma: no cover
 else:
     pass
 
-
-app.include_router(posts.router, prefix="/api")
+app.include_router(posts.router)
+app.include_router(users.router)

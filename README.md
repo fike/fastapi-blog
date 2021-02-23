@@ -3,7 +3,6 @@
     <img src="https://github.com/fike/fastapi-blog/workflows/Tests/badge.svg" alt="Test">
 </a>
 
-
 # A FastAPI sample
 
 This a FastAPI project for blog backend to learn purpose.
@@ -32,7 +31,7 @@ This repo is instrumented by OpenTelemtry and export metric to Jaeger that start
 
 ### Tests
 
-To run tests will up a postgresql container and expose 5432 port to populate. The report will write in htmlcov dir.
+To run tests will up a postgresql container and expose 5433 port to populate. The report will write in htmlcov dir.
 
 ```bash
 make test-local
@@ -46,11 +45,11 @@ make test-local
 
 * ~~Pagination~~
 * Run tests in container
-* Autentication
+* ~~Autentication~~
 * Implement UI (React)
 * Helm Chart
 * Improvement tests with tox
-* ~~Implement a default path (**/api**)~~
+* ~~Implement a default path (**/**)~~
 * Custom Limit and Offset
-* Add script to ingest samples
+* ~~Add script to ingest samples~~
 * ~~CI tests~~

@@ -28,7 +28,9 @@ def upgrade():
         sa.PrimaryKeyConstraint("id"),
         sa.UniqueConstraint("username"),
     )
-    op.add_column("posts", sa.Column("author_id", sa.Integer(), nullable=False))
+    op.add_column(
+        "posts", sa.Column("author_id", sa.Integer(), nullable=False)
+    )
     op.create_foreign_key(None, "posts", "users", ["author_id"], ["id"])
     # ### end Alembic commands ###
 

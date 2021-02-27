@@ -1,8 +1,6 @@
-from datetime import datetime
-
-from sqlalchemy import TIMESTAMP, Integer, String, Text
+from sqlalchemy import Integer, String, Text
 from sqlalchemy.orm import relationship
-from sqlalchemy.sql.schema import Column, ForeignKey
+from sqlalchemy.sql.schema import Column
 from sqlalchemy.sql.sqltypes import Boolean
 
 from app.db.base import Base
@@ -11,9 +9,9 @@ from app.db.base import Base
 class User(Base):
     __tablename__ = "users"
 
-    id = Column(Integer, primary_key=True)
-    username = Column(String(50), unique=True)
-    email = Column(String, nullable=False)
-    password = Column(String, nullable=False)
-    profile = Column(Text, nullable=False)
-    disabled = Column(Boolean, nullable=False)
+    id: int = Column(Integer, primary_key=True)
+    username: str = Column(String(50), unique=True)
+    email: str = Column(String, nullable=False)
+    hashed_password: str = Column(String, nullable=False)
+    profile: str = Column(Text, nullable=False)
+    disabled: bool = Column(Boolean, nullable=False)

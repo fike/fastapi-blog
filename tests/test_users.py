@@ -12,20 +12,63 @@ client = TestClient(app)
 @pytest.mark.parametrize(
     ("username", "profile", "email", "disabled", "password", "status"),
     (
-        ("leodoe", "Leo Doe Profile", "leodoe@test.org", False, "leodoepass", 201),
-        ("annedoe", "Anne Doe Profile", "annedoe@test.org", True, "annedoepass", 201),
+        (
+            "leodoe",
+            "Leo Doe Profile",
+            "leodoe@test.org",
+            False,
+            "leodoepass",
+            201,
+        ),
+        (
+            "annedoe",
+            "Anne Doe Profile",
+            "annedoe@test.org",
+            True,
+            "annedoepass",
+            201,
+        ),
         ("bruce", "Bruce Doe Profile", "", True, "annedoepass", 422),
         ("jenny", "", "jennydoe@test.org", True, "jennydoepass", 422),
-        ("tessdoe", "Tess Doe Profile", "tessdoe@test.org", False, "tessdoepass", 201),
-        ("rossdoe", "Ross Doe Profile", "leodoe@test.org", False, "tessdoepass", 400),
-        ("leodoe", "Mark Doe Profile", "markdow@test.org", False, "markdoepass", 400),
+        (
+            "tessdoe",
+            "Tess Doe Profile",
+            "tessdoe@test.org",
+            False,
+            "tessdoepass",
+            201,
+        ),
+        (
+            "rossdoe",
+            "Ross Doe Profile",
+            "leodoe@test.org",
+            False,
+            "tessdoepass",
+            400,
+        ),
+        (
+            "leodoe",
+            "Mark Doe Profile",
+            "markdow@test.org",
+            False,
+            "markdoepass",
+            400,
+        ),
         ("a", "A user profile Profile", "a@test.org", False, "apass", 422),
     ),
 )
-def test_create_user(username, profile, email, disabled, password, status, request):
+def test_create_user(
+    username, profile, email, disabled, password, status, request
+):
     response = client.post(
         "/users",
-        json={"username": username, "profile": profile, "email": email, "disabled": disabled, "password": password},
+        json={
+            "username": username,
+            "profile": profile,
+            "email": email,
+            "disabled": disabled,
+            "password": password,
+        },
     )
     assert status == response.status_code
 
@@ -83,4 +126,67 @@ def test_posts_by_user(username, status):
     token_data = create_access_token(data=data, expires_delta=req_time)
     headers["Authorization"] = "Bearer " + token_data
     response = client.get("/users/me/posts", headers=headers)
+    assert status == response.status_code
+
+
+@pytest.mark.parametrize(
+    ("path", "username", "profile", "email", "disabled", "password", "status"),
+    (
+        (
+            "leodoe",
+            "leodoe",
+            "Leo Doe Profile - Modified",
+            "leodoe@test.org",
+            False,
+            "leodoepass121",
+            200,
+        ),
+        (
+            "annedoe",
+            "leodoe",
+            "Leo Doe Profile - Modified",
+            "leodoe@test.org",
+            False,
+            "leodoepass",
+            403,
+        ),
+        (
+            "tessdoe",
+            "tessdoe",
+            "Tess Doe Profile - Modified",
+            "tessdoe@test.org",
+            False,
+            "",
+            200,
+        ),
+        (
+            "wrongdoe",
+            "wrongdoe",
+            "Tess Doe Profile",
+            "tessdoe@test.org",
+            False,
+            "",
+            401,
+        ),
+    ),
+)
+def test_update_user(
+    path, username, profile, email, disabled, password, status
+):
+    headers = {}
+    req_time = timedelta(minutes=30)
+    data = {"sub": username}
+    token_data = create_access_token(data=data, expires_delta=req_time)
+    headers["Authorization"] = "Bearer " + token_data
+    response = client.put(
+        "/users/" + path,
+        json={
+            "username": username,
+            "profile": profile,
+            "email": email,
+            "disabled": disabled,
+            "password": password,
+        },
+        headers=headers,
+    )
     assert status == response.status_code

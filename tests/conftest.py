@@ -8,8 +8,9 @@ from app.db.base import Base
 from app.db.session import SessionLocal, engine
 from app.main import app
 
-TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-
+TestingSessionLocal = sessionmaker(
+    autocommit=False, autoflush=False, bind=engine
+)
 Base.metadata.create_all(bind=engine)
 
 

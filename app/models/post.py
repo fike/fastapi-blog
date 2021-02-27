@@ -1,4 +1,5 @@
 from datetime import datetime
+from typing import Any
 
 from sqlalchemy import TIMESTAMP, Integer, String
 from sqlalchemy.orm import relationship
@@ -10,11 +11,13 @@ from . import user
 
 
 class Post(Base):
-    __tablename__ = "posts"
+    __tablename__: str = "posts"
 
-    id = Column(Integer, primary_key=True, index=True)
-    author_id = Column(ForeignKey(user.User.id), nullable=False)
-    slug = Column(String, index=True)
-    title = Column(String(100), index=True, nullable=False)
-    body = Column(String, index=False, nullable=False)
-    published = Column(TIMESTAMP(timezone=True), default=datetime.now)
+    id: int = Column(Integer, primary_key=True, index=True)
+    author_id: int = Column(ForeignKey(user.User.id), nullable=False)
+    slug: str = Column(String, index=True)
+    title: str = Column(String(100), index=True, nullable=False)
+    body: str = Column(String, index=False, nullable=False)
+    published: datetime = Column(
+        TIMESTAMP(timezone=True), default=datetime.now
+    )

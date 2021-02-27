@@ -147,3 +147,5 @@ dmypy.json
 htmlcov*
 .vscode
 .coverage
+.pyre_configuration
+.pyre

@@ -21,6 +21,12 @@ dev-up:
 dev-down: 
 	$(DC_EXEC) -f $(DC_DIR)/$(DC_APP_DEV) down 
 
+dev-db-kill:
+	$(DC_EXEC) -f $(DC_DIR)/$(DC_APP_DEV) kill db-fapi-blog
+
+dev-db-start:
+	$(DC_EXEC) -f $(DC_DIR)/$(DC_APP_DEV) up --remove-orphans -d db-fapi-blog
+
 dev-logs:
 	$(DC_EXEC) -f $(DC_DIR)/$(DC_APP) logs -f
 

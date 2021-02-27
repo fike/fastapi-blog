@@ -38,6 +38,8 @@ jobs:
         run: poetry run pre-commit run --all-files --show-diff-on-failure
   
       - name: Run tests
+        env:
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
         run: |
           make test-local
           

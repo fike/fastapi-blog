@@ -9,7 +9,11 @@ from app.services.security import create_access_token
 client = TestClient(app)
 
 
-long_title = "Test title - 1231453klfdncas\vnfaotg243rq34jfrngvkjsdfnlskedfasnbgkdndksfjaio32wrj34bn5kl34nfakdnsfakds"
+long_title = (
+    "Test title - "
+    "1231453klfdncas\vnfaotg243rq34jfrngvkjsdfnls"
+    "kedfasnbgkdndksfjaio32wrj34bn5kl34nfakdnsfakds"
+)
 
 
 @pytest.mark.order(-2)
@@ -20,6 +24,8 @@ long_title = "Test title - 1231453klfdncas\vnfaotg243rq34jfrngvkjsdfnlskedfasnbg
         ("leodoe", "", "Leo body post blog1", 422),
         ("leodoe", "Leo title blog1", "", 422),
         ("leodoe", long_title, "Leo long title exploit", 422),
+        ("tessdoe", "Tell title blog 2", "Tess body post blog 2", 201),
+        ("tessdoe", "Tell title blog 3", "Tess body post blog 3", 201),
     ),
 )
 def test_create_post(username, title, body, status):
@@ -28,7 +34,9 @@ def test_create_post(username, title, body, status):
     data = {"sub": username}
     token_data = create_access_token(data=data, expires_delta=req_time)
     headers["Authorization"] = "Bearer " + token_data
-    response = client.post("/posts", json={"title": title, "body": body}, headers=headers)
+    response = client.post(
+        "/posts", json={"title": title, "body": body}, headers=headers
+    )
     assert status == response.status_code
 
 
@@ -64,4 +72,57 @@ def test_get_users_posts(user_id, status):
 )
 def test_get_post(slug, status):
     response = client.get(f"/posts/{slug}")
+    assert status == response.status_code
+
+
+@pytest.mark.order(-2)
+@pytest.mark.parametrize(
+    ("username", "slug", "title", "body", "status"),
+    (
+        (
+            "tessdoe",
+            "tell-title-blog-3",
+            "Tell title blog 3",
+            "Tess body post blog 3 - Modified",
+            200,
+        ),
+        (
+            "leodoe",
+            "tell-title-blog-2",
+            "Tell title blog 2",
+            "Tess body post blog 2 - Modified",
+            403,
+        ),
+    ),
+)
+def test_update_post(username, slug, title, body, status):
+    headers = {}
+    req_time = timedelta(minutes=30)
+    data = {"sub": username}
+    token_data = create_access_token(data=data, expires_delta=req_time)
+    headers["Authorization"] = "Bearer " + token_data
+    response = client.put(
+        "/posts/" + slug, json={"title": title, "body": body}, headers=headers
+    )
+    assert status == response.status_code
+
+
+@pytest.mark.order(-2)
+@pytest.mark.parametrize(
+    ("username", "path", "slug", "status"),
+    (
+        ("tessdoe", "tell-title-blog-3", "tell-title-blog-3", 204),
+        ("tessdoe", "tell-title-blog-10000", "tell-title-blog-3", 404),
+        # ("tessdoe", "tell-title-blog-3", "tell-title-blog-1000", 404),
+        ("leodoe", "tell-title-blog-2", "tell-title-blog-2", 403),
+    ),
+)
+def test_delete_post(username, path, slug, status):
+    headers = {}
+    req_time = timedelta(minutes=30)
+    data = {"sub": username}
+    token_data = create_access_token(data=data, expires_delta=req_time)
+    headers["Authorization"] = "Bearer " + token_data
+    response = client.delete("/posts/" + path, headers=headers)
+    print(response.status_code)
     assert status == response.status_code

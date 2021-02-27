@@ -44,13 +44,13 @@ requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.black]
-line-length = 120
+line-length = 79
 target-version = ['py37', 'py38']
 include = '\.pyi?$'
 exclude = '''
 /(
     \.eggs
-  | \.git
+   \.git
   | \.hg
   | \.mypy_cache
   | \.tox
@@ -61,7 +61,7 @@ exclude = '''
   | dist
   # The following are specific to Black, you probably don't want those.
   | blib2to3
-  | tests/data
+  |  tests
   | profiling
 )/
 '''
@@ -70,4 +70,7 @@ exclude = '''
 include_trailing_comma = true
 force_grid_wrap = 0
 use_parentheses = true
+line_length = 79
+profile = "black"
+multi_line_output = 3
 known_third_party = ["alembic", "fastapi", "fastapi_pagination", "jose", "opentelemetry", "passlib", "pydantic", "pytest", "requests", "slugify", "sqlalchemy", "starlette"]

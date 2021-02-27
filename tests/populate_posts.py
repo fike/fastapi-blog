@@ -19,7 +19,9 @@ trace_exporter = jaeger.JaegerSpanExporter(
     agent_host_name="localhost",
     agent_port=6831,
 )
-trace.get_tracer_provider().add_span_processor(BatchExportSpanProcessor(trace_exporter))
+trace.get_tracer_provider().add_span_processor(
+    BatchExportSpanProcessor(trace_exporter)
+)
 
 
 URLBASE = "http://localhost:8000/"
@@ -73,26 +75,37 @@ def get_token(username, password):
 
 create_users()
 
-# for i in data_user_template:
 for y in range(1, 100):
     for i in data_user_template:
+        time.sleep(1)
         headers = {}
         date_txt = datetime.now()
         url = URLBASE + "posts"
         username = i["username"]
         password = i["password"]
-        token = get_token(username, password)
+        try:
+            token = get_token(username, password)
+        except Exception as e:
+            print(e.args)
+            continue
         headers["Authorization"] = "Bearer " + token
         post_title = str(
-            data_post_template["title"] + " - " + i["username"] + " - " + date_txt.strftime("%Y/%m/%d - %H:%m:%S")
+            data_post_template["title"]
+            + " - "
+            + i["username"]
+            + " - "
+            + date_txt.strftime("%Y/%m/%d - %H:%m:%S")
         )
         post_body = str(
-            data_post_template["body"] + " - " + i["username"] + " - " + date_txt.strftime("%Y/%m/%d - %H:%m:%S")
+            data_post_template["body"]
+            + " - "
+            + i["username"]
+            + " - "
+            + date_txt.strftime("%Y/%m/%d - %H:%m:%S")
         )
         post_req = json.dumps(dict({"title": post_title, "body": post_body}))
         resp = requests.post(url, data=post_req, headers=headers)
         print(resp.text)
-        time.sleep(1)
         assert resp.status_code == 201
 
 RequestsInstrumentor().instrument()

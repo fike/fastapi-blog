@@ -21,8 +21,7 @@ services:
     depends_on:
       - db-test
     environment:
-      - ENVIRONMENT=development
-      - SQLALCHEMY_DATABASE_URI=postgresql://test:test@db-test:5432/test_app
+      - ENVIRONMENT=testing
       - OTELE_TRACE=False
     networks:
       - test

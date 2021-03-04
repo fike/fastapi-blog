@@ -25,6 +25,7 @@ python-slugify = "^4.0.1"
 passlib = "^1.7.4"
 python-jose = "^3.2.0"
 python-multipart = "^0.0.5"
+pydantic = {extras = ["dotenv"], version = "^1.8.1"}
 
 
 [tool.poetry.dev-dependencies]

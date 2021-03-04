@@ -2,12 +2,17 @@ from typing import Generator
 
 import pytest
 from fastapi.testclient import TestClient
+from sqlalchemy import create_engine, engine
 from sqlalchemy.orm import sessionmaker
 
+from app.config import settings
 from app.db.base import Base
-from app.db.session import SessionLocal, engine
+from app.db.session import SessionLocal
 from app.main import app
 
+engine = create_engine(  # noqa
+    settings.TEST_SQLALCHEMY_DATABASE_URI, pool_pre_ping=True
+)
 TestingSessionLocal = sessionmaker(
     autocommit=False, autoflush=False, bind=engine
 )

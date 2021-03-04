@@ -1,10 +1,11 @@
 from datetime import timedelta
 from typing import Any, List, Optional
 
-from fastapi import Depends, HTTPException, status
+from fastapi import Depends, HTTPException, Response, status
 from fastapi.routing import APIRouter
 from fastapi.security import OAuth2PasswordRequestForm
 from fastapi_pagination import Page, pagination_params
+from fastapi_pagination.api import response
 from fastapi_pagination.ext.sqlalchemy import paginate
 from sqlalchemy.orm import Session
 
@@ -88,6 +89,7 @@ def read_user(
 def login_for_access_token(
     db: Session = Depends(get_db),
     form_data: OAuth2PasswordRequestForm = Depends(),
+    response: Response = None,  # noqa
 ) -> Any:
     """
     Generate a token to access endpoints
@@ -103,7 +105,14 @@ def login_for_access_token(
     access_token = create_access_token(
         data={"sub": user.username}, expires_delta=access_token_expires
     )
-    return {"access_token": access_token, "token_type": "bearer"}
+    token_data = {"access_token": access_token, "token_type": "bearer"}
+    response.set_cookie(
+        key="token",
+        value=access_token,
+        max_age=access_token_expires.total_seconds(),
+        httponly=True,
+    )
+    return token_data
 
 
 @router.get(

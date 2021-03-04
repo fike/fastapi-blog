@@ -40,6 +40,8 @@ jobs:
       - name: Run tests
         env:
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          ORIGINS: ${{ secrets.ORIGIN }}
+          TEST_SQLALCHEMY_DATABASE_URI: ${{ secrets.TEST_SQLALCHEMY_DATABASE_URI }}
         run: |
           make test-local
           

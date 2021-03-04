@@ -5,7 +5,7 @@ from jose import JWTError, jwt
 from sqlalchemy.orm import Session
 
 from app import schemas
-from app.config import SECRET_KEY
+from app.config import settings
 from app.db.session import SessionLocal
 
 from .security import ALGORITHM, oauth2_scheme
@@ -29,7 +29,9 @@ def get_current_user(
         headers={"WWW-Authenticate": "Bearer"},
     )
     try:
-        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        payload = jwt.decode(
+            token, settings.SECRET_KEY, algorithms=[ALGORITHM]
+        )
         username: str = payload.get("sub")
         token_data = schemas.TokenData(username=username)
     except JWTError:  # pragma: no cover

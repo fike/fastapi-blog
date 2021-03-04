@@ -24,7 +24,6 @@ services:
       - db-fapi-blog
     environment:
       - ENVIRONMENT=development
-      - SQLALCHEMY_DATABASE_URI=postgresql://fapi_blog:fapi_pass@db-fapi-blog:5432/fapi_blog
       - OTELE_TRACE=True
     networks:
       - dev

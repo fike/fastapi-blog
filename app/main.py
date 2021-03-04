@@ -2,8 +2,10 @@ from os import environ
 from typing import Any
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 from app import models
+from app.config import settings
 from app.routers import users
 
 from .db.session import engine
@@ -16,6 +18,16 @@ from .routers import posts
 app: Any = FastAPI(title="FastAPI Blog Backend - Opentelemetry, Jaeger")
 
 # logger = logging.getLogger("uvicorn.error")
+
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=settings.ORIGINS,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 otel_trace: Any = environ.get("OTELE_TRACE")
 

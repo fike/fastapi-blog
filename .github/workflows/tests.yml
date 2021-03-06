@@ -36,7 +36,7 @@ jobs:
 
       - name: Lint
         run: poetry run pre-commit run --all-files --show-diff-on-failure
-  
+
       - name: Run tests
         env:
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
@@ -44,4 +44,3 @@ jobs:
           TEST_SQLALCHEMY_DATABASE_URI: ${{ secrets.TEST_SQLALCHEMY_DATABASE_URI }}
         run: |
           make test-local
-          

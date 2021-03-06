@@ -130,7 +130,15 @@ def test_posts_by_user(username, status):
 
 
 @pytest.mark.parametrize(
-    ("path", "username", "profile", "email", "disabled", "password", "status"),
+    (
+        "path",
+        "username",
+        "profile",
+        "email",
+        "disabled",
+        "password",
+        "status",
+    ),
     (
         (
             "leodoe",

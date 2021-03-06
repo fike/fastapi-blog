@@ -2,6 +2,7 @@ deployments*
 .vscode
 .pytest_cache*
 htmlcov
+*venv*
 *.pyc
 __pycache__
 .coverage

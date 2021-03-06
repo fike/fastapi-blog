@@ -4,7 +4,6 @@ from typing import Any
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app import models
 from app.config import settings
 from app.routers import users
 
@@ -35,7 +34,9 @@ if otel_trace == "True":  # pragma: no cover
     from opentelemetry import trace
     from opentelemetry.exporter import jaeger
     from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
-    from opentelemetry.instrumentation.sqlalchemy import SQLAlchemyInstrumentor
+    from opentelemetry.instrumentation.sqlalchemy import (
+        SQLAlchemyInstrumentor,
+    )
     from opentelemetry.sdk.trace import TracerProvider
     from opentelemetry.sdk.trace.export import BatchExportSpanProcessor
 

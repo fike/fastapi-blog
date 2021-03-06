@@ -1,0 +1,41 @@
+repos:
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v3.2.0
+  hooks:
+    - id: trailing-whitespace
+    - id: end-of-file-fixer
+    - id: check-yaml
+    - id: check-added-large-files
+
+# -   repo: https://github.com/psf/black
+#     rev: 20.8b1
+#     hooks:
+#     - id: black
+#       # entry: black --config pyproject.toml --verbose safsf
+#       args: [--config pyproject.toml app/main.py]
+#       # entry: echo $PWD
+#       language_version: python3.8
+
+      # args: [--config=backend/pyproject.toml, --check, backend/]
+
+
+- repo: https://github.com/pycqa/isort
+  rev: 5.7.0
+  hooks:
+    - id: isort
+      files: ^backend/
+      args: [-v, --profile, black, --filter-files, backend/]
+      verbose: true
+
+- repo: https://github.com/psf/black
+  rev: 20.8b1
+  hooks:
+    - id: black
+      language_version: python3.9
+
+- repo: https://gitlab.com/pycqa/flake8
+  rev: 3.8.4
+  hooks:
+    - id: flake8
+      args: [--config=backend/.flake8, backend]
+      exclude: deployments, tests

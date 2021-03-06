@@ -6,9 +6,9 @@ from sqlalchemy.orm import sessionmaker
 
 from app.config import settings
 
-engine = create_engine(  # noqa
+engine = create_engine(
     settings.SQLALCHEMY_DATABASE_URI, pool_pre_ping=True
-)
+)  # noqa
 SessionLocal: Any = sessionmaker(
     autocommit=False, autoflush=False, bind=engine
 )

@@ -18,8 +18,8 @@ dev-up:
 	$(DC_EXEC) -f $(DC_DIR)/$(DC_APP_DEV) up -d --remove-orphans --build
 	$(DC_EXEC) -f $(DC_DIR)/$(DC_APP) logs -f
 
-dev-down:
-	$(DC_EXEC) -f $(DC_DIR)/$(DC_APP_DEV) down
+dev-down: 
+	$(DC_EXEC) -f $(DC_DIR)/$(DC_APP_DEV) down 
 
 dev-db-kill:
 	$(DC_EXEC) -f $(DC_DIR)/$(DC_APP_DEV) kill db-fapi-blog
@@ -43,15 +43,15 @@ db-up:
 	$(DC_EXEC) -f $(DC_DIR)/$(DC_APP) up --remove-orphans -d db-fapi-blog
 
 down:
-	$(DC_EXEC) -f $(DC_DIR)/$(DC_APP) down --remove-orphans
+	$(DC_EXEC) -f $(DC_DIR)/$(DC_APP) down --remove-orphans 
 
 migrate: test-commons test-db-up
 	sleep 3
 	PYTHONPATH=$${PWD} alembic upgrade head
 	PYTHONPATH=$${PWD} alembic revision --autogenerate
 
-pre-commint:
-	poetry run pre-commit run --files=backend/app/* --show-diff-on-failure
+pre-commint: 
+	poetry run pre-commit run --files backend/app/--show-diff-on-failure
 
 test-populate:
 	opentelemetry-instrument tests/populate_posts.py
@@ -61,7 +61,7 @@ test-db-up:
 
 test-down:
 	$(DC_EXEC) -f $(DC_DIR)/$(DC_APP_TEST) down --remove-orphans -v
-
+								   
 test-app:
 	$(DC_EXEC) -f $(DC_DIR)/$(DC_APP_DEV) up --remove-orphans -d backend
 
@@ -70,5 +70,5 @@ test-local: test-down clean test-db-up
 	poetry run coverage run -m pytest -vv
 	poetry run coverage report
 	poetry run coverage xml
-	poetry run coverage html
+	poetry run coverage html 
 	# $(DC_EXEC) -f $(DC_DIR)/$(DC_APP_TEST) down --remove-orphans -v --rmi local

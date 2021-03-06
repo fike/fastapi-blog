@@ -16,16 +16,16 @@ RUN pip install "poetry==${POETRY_VERSION}"
 
 WORKDIR /opt/blog/backend
 
-COPY poetry.lock /opt/blog/backend/
+COPY backend/poetry.lock /opt/blog/backend/
 
-COPY pyproject.toml /opt/blog/backend/
+COPY backend/pyproject.toml /opt/blog/backend/
 
 COPY deployments/entrypoints/fapi-init.sh /usr/local/bin/fapi-init.sh
 
 RUN poetry config virtualenvs.create false &&\
-    poetry install $(test ${ENVIRONMENT} = "production" && echo "--no-dev") --no-interaction --no-ansi 
+    poetry install $(test ${ENVIRONMENT} = "production" && echo "--no-dev") --no-interaction --no-ansi
 
-COPY . .
+COPY backend /opt/blog/backend
 
 EXPOSE 8000
 

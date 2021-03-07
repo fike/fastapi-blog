@@ -7,11 +7,7 @@ from .posts import (
     get_post,
     get_posts_by_userid,
 )
-from .security import (
-    authenticate_user,
-    create_access_token,
-    get_hash_password,
-)
+from .security import authenticate_user, create_access_token, get_hash_password
 from .users import (
     create_user,
     get_user_by_email,

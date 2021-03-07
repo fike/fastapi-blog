@@ -13,6 +13,6 @@ jobs:
         id: run_horusec
         uses: fike/horusec-action@v0.1-alpha
         with:
-          arguments: --config-file-path=horusec-config.json
+          arguments: --config-file-path=horusec-config.json 
         
 

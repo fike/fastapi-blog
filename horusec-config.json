@@ -26,7 +26,7 @@
   "horusecCliJsonOutputFilepath": "",
   "horusecCliMonitorRetryInSeconds": 15,
   "horusecCliPrintOutputType": "text",
-  "horusecCliProjectPath": "/home/fernandoike/d/fastapi-samples/blog",
+  "horusecCliProjectPath": "./",
   "horusecCliRepositoryAuthorization": "00000000-0000-0000-0000-000000000000",
   "horusecCliRepositoryName": "blog",
   "horusecCliReturnErrorIfFoundVulnerability": false,

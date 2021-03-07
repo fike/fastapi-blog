@@ -47,9 +47,7 @@ def create_new_user(
             status_code=400, detail="Username already registered"
         )
     elif db_email:
-        raise HTTPException(
-            status_code=400, detail="Email already registered"
-        )
+        raise HTTPException(status_code=400, detail="Email already registered")
     return create_user(db=db, user=user)
 
 

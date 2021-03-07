@@ -1,0 +1,19 @@
+FROM node:lts-buster
+
+ARG ENVIRONMENT
+
+ENV ENVIRONMENT=${ENVIRONMENT}
+
+WORKDIR /opt/blog/frontend
+
+COPY frontend/package.json /opt/blog/frontend/
+
+COPY frontend/yarn.lock /opt/blog/frontend/
+
+COPY frontend /opt/blog/frontend
+
+RUN yarn install
+
+EXPOSE 3000
+
+ENTRYPOINT yarn dev

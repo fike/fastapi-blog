@@ -18,8 +18,8 @@ services:
       dockerfile: deployments/Dockerfile_backend_dev
       args:
         ENVIRONMENT: development
-    # volumes:
-    #   - $PWD/backend:/opt/blog/backend
+    volumes:
+      - $PWD/backend:/opt/blog/backend
     depends_on:
       - db-fapi-blog
     environment:
@@ -29,6 +29,24 @@ services:
       - dev
     ports:
       - 8000:8000
+    restart: always
+  frontend:
+    build:
+      context: ../
+      dockerfile: deployments/Dockerfile_frontend_dev
+      args:
+        ENVIRONMENT: development
+    volumes:
+      - $PWD/frontend:/opt/blog/frontend
+    depends_on:
+      - backend
+    environment:
+      - ENVIRONMENT=development
+      - OTELE_TRACE=False
+    networks:
+      - dev
+    ports:
+      - 3000:3000
     restart: always
   jaeger-server:
     image: jaegertracing/all-in-one

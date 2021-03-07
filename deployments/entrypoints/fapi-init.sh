@@ -4,9 +4,6 @@ set -e
 sleep 2
 
 export PYTHONPATH=/opt/blog/backend
-
-cd $PYTHONPATH
-find |grep alembic.in
 alembic upgrade head
 
 # Disabled opentelemetry-instrument with opentelemetry-instrumentation-sqlalchemy brake DefaultTraceProvider

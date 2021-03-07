@@ -13,6 +13,6 @@ jobs:
         id: run_horusec
         uses: fike/horusec-action@v0.1-alpha
         with:
-          arguments: -p="./" --ignore="**/htmlcov/**, **/deployments/**, **/.git/**, **/**.pyre, **/.venv/**, **/.vscode/**, **/*.env, **/.mypy_cache/**, **/tests/**"
+          arguments: --config-file-path=horusec-config.json
         
 

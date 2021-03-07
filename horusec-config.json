@@ -1,0 +1,143 @@
+{
+  "horusecCliCertInsecureSkipVerify": false,
+  "horusecCliCertPath": "",
+  "horusecCliContainerBindProjectPath": "",
+  "horusecCliCustomRulesPath": "",
+  "horusecCliDisableDocker": false,
+  "horusecCliEnableCommitAuthor": false,
+  "horusecCliEnableGitHistoryAnalysis": false,
+  "horusecCliEnableInformationSeverity": false,
+  "horusecCliFalsePositiveHashes": [],
+  "horusecCliFilesOrPathsToIgnore": [
+    "*tmp*",
+    "**/.vscode/**",
+    "**/deployments/**",
+    "**/.git/**",
+    "**/.pyre/**",
+    "**/.venv/**",
+    "**/*.env",
+    "**/.mypy_cache/**", 
+    "**/tests/**",
+    "**/frontend/**"
+  ],
+  "horusecCliFilterPath": "",
+  "horusecCliHeaders": {},
+  "horusecCliHorusecApiUri": "http://0.0.0.0:8000",
+  "horusecCliJsonOutputFilepath": "",
+  "horusecCliMonitorRetryInSeconds": 15,
+  "horusecCliPrintOutputType": "text",
+  "horusecCliProjectPath": "/home/fernandoike/d/fastapi-samples/blog",
+  "horusecCliRepositoryAuthorization": "00000000-0000-0000-0000-000000000000",
+  "horusecCliRepositoryName": "blog",
+  "horusecCliReturnErrorIfFoundVulnerability": false,
+  "horusecCliRiskAcceptHashes": ["069da1c061c4501fa2ebf8187d0e23b168189bc0c4c27873e59d9328f0e3e27f", "7dc117701c9af0d3595aa829b6b910e4f03c39aecc8b1fd78ba7bbe4f58d446c"],
+  "horusecCliSeveritiesToIgnore": [
+    "AUDIT",
+    "INFO"
+  ],
+  "horusecCliTimeoutInSecondsAnalysis": 600,
+  "horusecCliTimeoutInSecondsRequest": 300,
+  "horusecCliToolsConfig": {
+    "Bandit": {
+      "istoignore": false,
+      "imagepath": ""
+    },
+    "Brakeman": {
+      "istoignore": false,
+      "imagepath": ""
+    },
+    "Eslint": {
+      "istoignore": false,
+      "imagepath": ""
+    },
+    "Flawfinder": {
+      "istoignore": false,
+      "imagepath": ""
+    },
+    "GitLeaks": {
+      "istoignore": false,
+      "imagepath": ""
+    },
+    "GoSec": {
+      "istoignore": false,
+      "imagepath": ""
+    },
+    "HorusecCsharp": {
+      "istoignore": false,
+      "imagepath": ""
+    },
+    "HorusecDart": {
+      "istoignore": false,
+      "imagepath": ""
+    },
+    "HorusecJava": {
+      "istoignore": false,
+      "imagepath": ""
+    },
+    "HorusecKotlin": {
+      "istoignore": false,
+      "imagepath": ""
+    },
+    "HorusecKubernetes": {
+      "istoignore": false,
+      "imagepath": ""
+    },
+    "HorusecLeaks": {
+      "istoignore": false,
+      "imagepath": ""
+    },
+    "HorusecNodeJS": {
+      "istoignore": false,
+      "imagepath": ""
+    },
+    "NpmAudit": {
+      "istoignore": false,
+      "imagepath": ""
+    },
+    "PhpCS": {
+      "istoignore": false,
+      "imagepath": ""
+    },
+    "Safety": {
+      "istoignore": false,
+      "imagepath": ""
+    },
+    "SecurityCodeScan": {
+      "istoignore": false,
+      "imagepath": ""
+    },
+    "Semgrep": {
+      "istoignore": false,
+      "imagepath": ""
+    },
+    "ShellCheck": {
+      "istoignore": false,
+      "imagepath": ""
+    },
+    "TfSec": {
+      "istoignore": false,
+      "imagepath": ""
+    },
+    "YarnAudit": {
+      "istoignore": false,
+      "imagepath": ""
+    }
+  },
+  "horusecCliToolsToIgnore": [],
+  "horusecCliWorkDir": {
+    "go": [],
+    "netCore": [],
+    "csharp": [],
+    "ruby": [],
+    "python": [],
+    "java": [],
+    "kotlin": [],
+    "javaScript": [],
+    "leaks": [],
+    "hcl": [],
+    "php": [],
+    "c": [],
+    "yaml": [],
+    "generic": []
+  }
+}

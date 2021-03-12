@@ -13,10 +13,10 @@ services:
     ports:
       - 5432:5432
   backend:
-    build: 
+    build:
       context: ../
       dockerfile: deployments/Dockerfile_backend
-      args: 
+      args:
         ENVIRONMENT: production
     volumes:
       - $PWD:/opt/blog/backend

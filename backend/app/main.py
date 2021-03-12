@@ -4,7 +4,6 @@ from typing import Any
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app import models
 from app.config import settings
 from app.routers import users
 

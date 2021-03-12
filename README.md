@@ -51,7 +51,7 @@ python -m venv .venv
 
 pip install poetry
 
-poetry install 
+poetry install
 ```
 
 #### Start FastAPI, PostgreSQL and Jaeger

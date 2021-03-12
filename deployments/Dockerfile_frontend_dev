@@ -4,13 +4,14 @@ ARG ENVIRONMENT
 
 ENV ENVIRONMENT=${ENVIRONMENT}
 
+RUN mkdir -p /opt/blog/frontend &&\
+    chown -R node: /opt/blog/frontend
+
 WORKDIR /opt/blog/frontend
 
 COPY frontend/package.json /opt/blog/frontend/
 
-COPY frontend/yarn.lock /opt/blog/frontend/
-
-COPY frontend /opt/blog/frontend
+COPY frontend/* /opt/blog/frontend/
 
 RUN yarn install
 

@@ -18,12 +18,14 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - name: Install Poetry
+        working-directory: ./backend
         run: |
           pip install -U poetry
 
       - name: Cache Poetry virtualenv
         uses: actions/cache@v2.1.4
         id: cache
+        # working-directory: ./backend
         with:
           path: ~/.virtualenvs
           key: poetry-${{ hashFiles('**/poetry.lock') }}
@@ -31,10 +33,12 @@ jobs:
             poetry-${{ hashFiles('**/poetry.lock') }}
 
       - name: Install dependencies
+        working-directory: ./backend
         run: |
           poetry install --no-interaction --no-ansi
 
       - name: Lint
+        working-directory: ./backend
         run: poetry run pre-commit run --all-files --show-diff-on-failure
 
       - name: Run tests

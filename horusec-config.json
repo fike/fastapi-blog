@@ -16,7 +16,8 @@
     "**/.pyre/**",
     "**/.venv/**",
     "**/*.env",
-    "**/.mypy_cache/**", 
+    "**/.mypy_cache/**",
+    "**/htmlcov/**",
     "**/tests/**",
     "**/frontend/**"
   ],
@@ -26,13 +27,12 @@
   "horusecCliJsonOutputFilepath": "",
   "horusecCliMonitorRetryInSeconds": 15,
   "horusecCliPrintOutputType": "text",
-  "horusecCliProjectPath": "./",
+  "horusecCliProjectPath": "",
   "horusecCliRepositoryAuthorization": "00000000-0000-0000-0000-000000000000",
   "horusecCliRepositoryName": "blog",
   "horusecCliReturnErrorIfFoundVulnerability": false,
-  "horusecCliRiskAcceptHashes": ["069da1c061c4501fa2ebf8187d0e23b168189bc0c4c27873e59d9328f0e3e27f", "7dc117701c9af0d3595aa829b6b910e4f03c39aecc8b1fd78ba7bbe4f58d446c"],
+  "horusecCliRiskAcceptHashes": ["6af7956a65796dbb1ce8435abf66a3b14b5a54e35fc7e99b1b228b70ee080d54", "f9179fb6380ab381b305b6e6e490e0c155f32c2dc89a4674840c5febd51f2528"],
   "horusecCliSeveritiesToIgnore": [
-    "AUDIT",
     "INFO"
   ],
   "horusecCliTimeoutInSecondsAnalysis": 600,

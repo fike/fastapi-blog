@@ -14,28 +14,69 @@ long_title = (
     "1231453klfdncas\vnfaotg243rq34jfrngvkjsdfnls"
     "kedfasnbgkdndksfjaio32wrj34bn5kl34nfakdnsfakds"
 )
+long_summary = (
+    "a egeanbv t qvfdagasdfoghed erogfvedimvgadfgadfag"
+    "fasd fgaovrmehyynnmsdf  adfgasdfgadsogagberthetrh"
+    "adf asdf aspertabvgnhbgn  nhnjmhjhnmbv nvcwrerehg"
+    "f fdgvsdhtnbnmnýtqworeuwiyt    reyw qreptoieryhutrw"
+    "afsdf awrtqwfwghhth  tuhytpojfghnj mvbnm2353546cvvs"
+)
 
 
 @pytest.mark.order(-2)
 @pytest.mark.parametrize(
-    ("username", "title", "body", "status"),
+    ("username", "title", "summary", "body", "status"),
     (
-        ("leodoe", "Leo title blog1", "Leo body post blog1", 201),
-        ("leodoe", "", "Leo body post blog1", 422),
-        ("leodoe", "Leo title blog1", "", 422),
-        ("leodoe", long_title, "Leo long title exploit", 422),
-        ("tessdoe", "Tell title blog 2", "Tess body post blog 2", 201),
-        ("tessdoe", "Tell title blog 3", "Tess body post blog 3", 201),
+        (
+            "leodoe",
+            "Leo title blog1",
+            "Leo summary post 1",
+            "Leo body post blog1",
+            201,
+        ),
+        ("leodoe", "", "Leo summary post 1", "Leo body post blog1", 422),
+        ("leodoe", "Leo title blog1", "", "Leo body post blog1", 422),
+        ("leodoe", "Leo title blog1", "Leo summary post 1", "", 422),
+        (
+            "leodoe",
+            long_title,
+            "Leo summary post 1",
+            "Leo long title exploit",
+            422,
+        ),
+        (
+            "leodoe",
+            "Leo long summary exploit",
+            long_summary,
+            "Leo long title exploit",
+            422,
+        ),
+        (
+            "tessdoe",
+            "Tess title blog 2",
+            "Tess summary post 2",
+            "Tess body post blog 2",
+            201,
+        ),
+        (
+            "tessdoe",
+            "Tess title blog 3",
+            "Tess summary post 3",
+            "Tess body post blog 3",
+            201,
+        ),
     ),
 )
-def test_create_post(username, title, body, status):
+def test_create_post(username, title, summary, body, status):
     headers = {}
     req_time = timedelta(minutes=30)
     data = {"sub": username}
     token_data = create_access_token(data=data, expires_delta=req_time)
     headers["Authorization"] = "Bearer " + token_data
     response = client.post(
-        "/posts", json={"title": title, "body": body}, headers=headers
+        "/posts",
+        json={"title": title, "summary": summary, "body": body},
+        headers=headers,
     )
     assert status == response.status_code
 
@@ -77,44 +118,58 @@ def test_get_post(slug, status):
 
 @pytest.mark.order(-2)
 @pytest.mark.parametrize(
-    ("username", "slug", "title", "body", "status"),
+    ("username", "slug", "title", "summary", "body", "status"),
     (
         (
             "tessdoe",
-            "tell-title-blog-3",
-            "Tell title blog 3",
-            "Tess body post blog 3 - Modified",
+            "tess-title-blog-2",
+            "Tess title blog 2",
+            "Tess summary post 2 - modified",
+            "Tess body post blog 2 - Modified",
             200,
         ),
         (
-            "leodoe",
-            "tell-title-blog-2",
-            "Tell title blog 2",
+            "tessdoe",
+            "tess-title-not-found",
+            "Tess title blog 2",
+            "Tess summary post 2 - modified",
             "Tess body post blog 2 - Modified",
+            404,
+        ),
+        (
+            "leodoe",
+            "tess-title-blog-2",
+            "Tess title blog 3",
+            "Tess summary post 3 - modified",
+            "Tess body post blog 3 - Modified",
             403,
         ),
     ),
 )
-def test_update_post(username, slug, title, body, status):
+def test_update_post(username, slug, title, summary, body, status):
     headers = {}
     req_time = timedelta(minutes=30)
     data = {"sub": username}
     token_data = create_access_token(data=data, expires_delta=req_time)
     headers["Authorization"] = "Bearer " + token_data
+    # print(headers)
+    # print(slug)
     response = client.put(
-        "/posts/" + slug, json={"title": title, "body": body}, headers=headers
+        "/posts/" + slug,
+        json={"title": title, "summary": summary, "body": body},
+        headers=headers,
     )
+    print(response.status_code)
     assert status == response.status_code
 
 
-@pytest.mark.order(-2)
+@pytest.mark.order(-1)
 @pytest.mark.parametrize(
     ("username", "path", "slug", "status"),
     (
-        ("tessdoe", "tell-title-blog-3", "tell-title-blog-3", 204),
+        ("tessdoe", "tess-title-blog-3", "tell-title-blog-3", 204),
         ("tessdoe", "tell-title-blog-10000", "tell-title-blog-3", 404),
-        # ("tessdoe", "tell-title-blog-3", "tell-title-blog-1000", 404),
-        ("leodoe", "tell-title-blog-2", "tell-title-blog-2", 403),
+        ("leodoe", "tess-title-blog-2", "tell-title-blog-2", 403),
     ),
 )
 def test_delete_post(username, path, slug, status):

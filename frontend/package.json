@@ -1,25 +1,32 @@
 {
-  "name": "blog-demo-front",
+  "name": "fastapi-nextjs-blog-system",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next",
+    "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "post-update": "echo \"codesandbox preview only, need an update\" && yarn upgrade --latest",
-    "build:css": "postcss styles/tailwind.css -o styles/main.css",
-    "build:watch": "postcss styles/tailwind.css -o styles/main.css --watch",
-    "prod:build": "NODE_ENV=production yarn run build:css && yarn run build"
+    "start": "next start"
   },
   "dependencies": {
-    "@tailwindcss/typography": "^0.4.0",
-    "autoprefixer": "^10.2.5",
+    "@chakra-ui/icons": "^1.0.3",
+    "@chakra-ui/react": "^1.1.5",
+    "@emotion/react": "^11.1.4",
+    "@emotion/styled": "^11.0.0",
+    "date-fns": "^2.16.1",
+    "framer-motion": "^3.2.1",
+    "gray-matter": "^4.0.2",
     "isomorphic-fetch": "^3.0.0",
-    "next": "^10.0.8",
-    "postcss": "^8.2.8",
-    "postcss-cli": "^8.3.1",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "tailwindcss": "^2.0.3"
+    "mdx-prism": "^0.3.1",
+    "next": "10.0.5",
+    "next-google-fonts": "^2.1.0",
+    "next-mdx-remote": "^2.1.3",
+    "react": "16.13.1",
+    "react-dom": "17.0.1",
+    "reading-time": "^1.3.0",
+    "rehype": "^11.0.0",
+    "remark-autolink-headings": "^6.0.1",
+    "remark-capitalize": "^1.1.0",
+    "remark-code-titles": "^0.1.1",
+    "remark-slug": "^6.0.0"
   }
 }

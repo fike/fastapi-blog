@@ -46,6 +46,7 @@ def update_post(db: Session, post: str, slug: str) -> Any:
     post_data: dict = post.dict()
     setattr(db_post, "title", post_data["title"])
     setattr(db_post, "slug", slugify(post_data["title"]))
+    setattr(db_post, "summary", post_data["summary"])
     setattr(db_post, "body", post_data["body"])
 
     db.commit()

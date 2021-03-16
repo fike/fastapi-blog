@@ -6,4 +6,5 @@ htmlcov
 *.pyc
 __pycache__
 .coverage
+*node_modules*
 !deployments/entrypoints/*

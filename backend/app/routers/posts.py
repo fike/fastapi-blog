@@ -93,10 +93,12 @@ def update_user_post(
     current_user: schemas.User = Depends(get_current_active_user),
 ) -> Any:
     """
-    Update a user psot if its owner
+    Update a user Post if its owner
     """
     post_data = get_post(db, slug)
-    if post_data.author_id != current_user.id:
+    if post_data is None:
+        raise HTTPException(status_code=404, detail="Don't find post")
+    elif post_data.author_id != current_user.id:
         raise HTTPException(status_code=403, detail="Don't have permission")
     req_post = update_post(db=db, slug=slug, post=post)
     return req_post

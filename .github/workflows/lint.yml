@@ -1,4 +1,4 @@
-name: Tests
+name: Lint
 
 on: [ push ]
 
@@ -36,10 +36,6 @@ jobs:
         run: |
           poetry install --no-interaction --no-ansi
 
-      - name: Run tests
-        env:
-          SECRET_KEY: ${{ secrets.SECRET_KEY }}
-          ORIGINS: ${{ secrets.ORIGIN }}
-          TEST_SQLALCHEMY_DATABASE_URI: ${{ secrets.TEST_SQLALCHEMY_DATABASE_URI }}
-        run: |
-          make test-local
+      - name: Lint
+        working-directory: ./backend
+        run: poetry run pre-commit run --all-files --show-diff-on-failure

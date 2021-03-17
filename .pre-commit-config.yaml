@@ -13,16 +13,18 @@ repos:
     - id: isort
       files: ^backend/
       args: [-v, --profile, black, --filter-files, backend/]
+      exclude: deployments, tests, frontend
 
 - repo: https://github.com/psf/black
   rev: 20.8b1
   hooks:
     - id: black
       language_version: python3.9
+      exclude: deployments, tests, frontend
 
 - repo: https://gitlab.com/pycqa/flake8
   rev: 3.8.4
   hooks:
     - id: flake8
       args: [--config=backend/.flake8, backend]
-      exclude: deployments, tests
+      exclude: deployments, tests, frontend

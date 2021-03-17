@@ -8,11 +8,9 @@ jobs:
     name: Horusec Scan
     steps:
       - uses: actions/checkout@v2
-    
+
       - name: Run Horusec
         id: run_horusec
-        uses: fike/horusec-action@v0.1-alpha
+        uses: fike/horusec-action@v0.2
         with:
-          arguments: --config-file-path=horusec-config.json 
-        
-
+          arguments: -c=horusec-config.json

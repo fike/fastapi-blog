@@ -1,62 +1,67 @@
-import Link from "next/link";
-import HeadDefault from "../components/HeadDefault";
-import { Navbar } from "../components/NavBar";
-import ListPostsData from "../components/Posts";
+import React, { useState } from "react";
+import Head from "next/head";
+import {
+  Heading,
+  Flex,
+  Stack,
+  Input,
+  InputGroup,
+  InputRightElement,
+} from "@chakra-ui/react";
 
+import Container from "../components/Container";
+import { getPosts } from "../lib/getPosts";
+import BlogPost from "../components/BlogPost";
 
-export default function Home({posts}) {
+import { SearchIcon } from "@chakra-ui/icons";
+
+export default function Blog({ posts }) {
+  // const [searchValue, setSearchValue] = useState("");
+
+  const BlogPosts = posts
+  //   .sort(
+  //     (a, b) =>
+  //       Number(new Date(b.published_at)) - Number(new Date(a.published_at))
+  //   )
+  //   .filter((frontMatter) =>
+  //     frontMatter.title.toLowerCase().includes(searchValue.toLowerCase())
+  //   );
+
   return (
-    <div className="bg-gray-50">
-      <HeadDefault />
-      <Navbar />
-      <div className="max-w-screen-md mx-auto flex p-3">
-      <ListPostsData />
-      </div>
-    <style global jsx>{`
-      html,
-      body,
-      body > div:first-child,
-      div#__next,
-      div#__next > div {
-        height: 100%;
-      }
-    `}</style>
-    </div>
-  )
+    <>
+      <Head>
+        <title>ABlogsys - FastAPI and Next.js</title>
+      </Head>
+      <Container>
+        <Stack
+          as="main"
+          spacing={8}
+          justifyContent="center"
+          alignItems="flex-start"
+          m="0 auto 4rem auto"
+          maxWidth="700px"
+        >
+          <Flex
+            flexDirection="column"
+            justifyContent="flex-start"
+            alignItems="flex-start"
+            maxWidth="700px"
+            px={4}
+          >
+            <Heading letterSpacing="tight" mb={4} as="h1" size="xl">
+              Blog ({posts.length} posts)
+            </Heading>
+            {BlogPosts.map((frontMatter) => (
+              <BlogPost key={frontMatter.title} {...frontMatter} />
+            ))}
+          </Flex>
+        </Stack>
+      </Container>
+    </>
+  );
 }
 
 export async function getStaticProps() {
-  const res = await fetch('http://backend:8000/posts?page=0&size=3')
-  const raw_posts = await res.json()
-  const posts = raw_posts['items']
-  console.log(posts)
-  return {
-    props: {
-      posts,
-    },
-  }
+  const posts = await getPosts("http://backend:8000/posts?page=0&size=50");
+  return { props: { posts } };
 }
-
-// function Content({ posts }) {
-//   return (
-//     <ul>
-//       {posts.map((post) => (
-//         <div key={post.id}>{post.title}</div>
-//       ))}
-//     </ul>
-//   );
-// }
-
-// export async function getStaticProps() {
-//   const res = await fetch("http://backend:8000/posts?page=0&size=3");
-//   const raw_posts = await res.json();
-//   const posts = raw_posts["items"];
-//   console.log(posts);
-//   return {
-//     props: {
-//       posts,
-//     },
-//   };
-// }
-
-// export default Content;

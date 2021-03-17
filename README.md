@@ -16,11 +16,15 @@ It's a FastAPI implementation as the backend for a blog system. This project's a
 * Docker
 * Docker-Compose
 * Jaeger
+* Next.js
+* React
 * Make
 
 ## How to use
 
 Use make command to run inside a docker container, it'll expose the port 8000 and access using URL: `http://localhost:8000`. I'm not sure if a makefile runs in the Powershell, probably yes but I suggest using [WSL2](https://docs.microsoft.com/windows/wsl/install-win10).
+
+The frontend is in the early stage but you can see access: `http://localhost:3000/`.
 
 **Up and run**:
 

@@ -1,6 +1,8 @@
+from datetime import datetime
 from typing import Any
 
 from slugify import slugify
+from sqlalchemy import desc
 from sqlalchemy.orm import Session
 
 from app import models, schemas
@@ -13,6 +15,7 @@ def create_post(
     post_data["slug"] = slugify(post_data["title"])
     user_data = schemas.User.from_orm(current_user).dict()
     post_data["author_id"] = user_data["id"]
+    post_data["published_at"] = datetime.now()
     db_post = models.Post(**post_data)
     db.add(db_post)
     db.commit()
@@ -28,7 +31,7 @@ def get_post(db: Session, slug: str) -> Any:
 def get_all_posts(
     db: Session,
 ) -> list:
-    posts = db.query(models.Post)
+    posts = db.query(models.Post).order_by(desc(models.Post.published_at))
     return posts
 
 

@@ -1,3 +1,4 @@
+import json
 from datetime import timedelta
 
 import pytest
@@ -81,9 +82,12 @@ def test_create_post(username, title, summary, body, status):
     assert status == response.status_code
 
 
+@pytest.mark.order(-2)
 def test_get_posts():
     response = client.get("/posts")
+    data = json.loads(response.text)
     assert 200 == response.status_code
+    assert data["items"][0]["published_at"] != data["items"][1]["published_at"]
 
 
 @pytest.mark.order(-1)
@@ -152,14 +156,12 @@ def test_update_post(username, slug, title, summary, body, status):
     data = {"sub": username}
     token_data = create_access_token(data=data, expires_delta=req_time)
     headers["Authorization"] = "Bearer " + token_data
-    # print(headers)
-    # print(slug)
+
     response = client.put(
         "/posts/" + slug,
         json={"title": title, "summary": summary, "body": body},
         headers=headers,
     )
-    print(response.status_code)
     assert status == response.status_code
 
 
@@ -179,5 +181,4 @@ def test_delete_post(username, path, slug, status):
     token_data = create_access_token(data=data, expires_delta=req_time)
     headers["Authorization"] = "Bearer " + token_data
     response = client.delete("/posts/" + path, headers=headers)
-    print(response.status_code)
     assert status == response.status_code

@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import hydrate from "next-mdx-remote/hydrate";
 
-import { getPostBySlug, getPosts } from "../lib/getPosts";
+import { getAllPosts, getPostBySlug, getPosts } from "../lib/getPosts";
 import MDXComponents from "../components/MDXComponents";
 import Container from "../components/Container";
 import { formatDate } from "../lib/formatDate";
@@ -88,9 +88,10 @@ export default function Blog({mdxSource, frontMatter }) {
 }
 
 export async function getStaticPaths() {
-  const url = "http://backend:8000/posts?page=0&size=50";
-  const data = await getPosts(url);
-
+  const url = "http://backend:8000/posts";
+  // const data = await getPosts(url);
+  const data = await getAllPosts();
+  // console.log(data1)
   return {
     paths: data.map((p) => ({
       params: {

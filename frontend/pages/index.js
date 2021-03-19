@@ -10,22 +10,14 @@ import {
 } from "@chakra-ui/react";
 
 import Container from "../components/Container";
-import { getPosts } from "../lib/getPosts";
+import { getPosts, getAllPosts } from "../lib/getPosts";
 import BlogPost from "../components/BlogPost";
 
 import { SearchIcon } from "@chakra-ui/icons";
 
 export default function Blog({ posts }) {
-  // const [searchValue, setSearchValue] = useState("");
 
   const BlogPosts = posts
-  //   .sort(
-  //     (a, b) =>
-  //       Number(new Date(b.published_at)) - Number(new Date(a.published_at))
-  //   )
-  //   .filter((frontMatter) =>
-  //     frontMatter.title.toLowerCase().includes(searchValue.toLowerCase())
-  //   );
 
   return (
     <>
@@ -63,5 +55,6 @@ export default function Blog({ posts }) {
 
 export async function getStaticProps() {
   const posts = await getPosts("http://backend:8000/posts?page=0&size=50");
+
   return { props: { posts } };
 }

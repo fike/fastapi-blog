@@ -1,4 +1,7 @@
 module.exports = {
+  env: {
+    BACKEND_URI: 'http://backend:8000'
+  },
   webpack: (config, { isServer }) => {
     // Fixes npm packages that depend on `fs` module
     // without this we get

@@ -31,7 +31,7 @@
   "horusecCliRepositoryAuthorization": "00000000-0000-0000-0000-000000000000",
   "horusecCliRepositoryName": "blog",
   "horusecCliReturnErrorIfFoundVulnerability": false,
-  "horusecCliRiskAcceptHashes": ["6af7956a65796dbb1ce8435abf66a3b14b5a54e35fc7e99b1b228b70ee080d54", "f9179fb6380ab381b305b6e6e490e0c155f32c2dc89a4674840c5febd51f2528"],
+  "horusecCliRiskAcceptHashes": ["6af7956a65796dbb1ce8435abf66a3b14b5a54e35fc7e99b1b228b70ee080d54", "f9179fb6380ab381b305b6e6e490e0c155f32c2dc89a4674840c5febd51f2528", "afeaab851451044d34e4eb5c27302069f18530929ae5b019663b24d21ab37ee9"],
   "horusecCliSeveritiesToIgnore": [
     "INFO"
   ],

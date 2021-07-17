@@ -1,6 +1,6 @@
-from hashlib import algorithms_available
 import os
 from datetime import datetime, timedelta
+from hashlib import algorithms_available
 from typing import Any, Optional
 
 from fastapi.security import OAuth2PasswordBearer

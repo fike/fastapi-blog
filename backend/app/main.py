@@ -13,11 +13,9 @@ from .routers import posts
 # Create database tables to start
 # models.Base.metadata.create_all(bind=engine)
 
-
 app: Any = FastAPI(title="FastAPI Blog Backend - Opentelemetry, Jaeger")
 
 # logger = logging.getLogger("uvicorn.error")
-
 
 app.add_middleware(
     CORSMiddleware,
@@ -33,21 +31,31 @@ otel_trace: Any = environ.get("OTELE_TRACE")
 if otel_trace == "True":  # pragma: no cover
     from opentelemetry import trace
     from opentelemetry.exporter import jaeger
+    from opentelemetry.exporter.otlp.proto.grpc.trace_exporter import (
+        OTLPSpanExporter,
+    )
     from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
     from opentelemetry.instrumentation.sqlalchemy import SQLAlchemyInstrumentor
-    from opentelemetry.sdk.trace import TracerProvider
-    from opentelemetry.sdk.trace.export import BatchExportSpanProcessor
+    from opentelemetry.sdk.resources import Resource
 
-    trace.set_tracer_provider(TracerProvider())
-    trace_exporter: Any = jaeger.JaegerSpanExporter(
-        service_name="fastapi-blog",
-        agent_host_name="jaeger-server",
-        agent_port=6831,
+    # from opentelemetry.instrumentation.psycopg2 import Psycopg2Instrumentor
+    from opentelemetry.sdk.trace import TracerProvider
+    from opentelemetry.sdk.trace.export import BatchSpanProcessor
+
+    resource = Resource(attributes={"service.name": "fastapi-blog"})
+    trace.set_tracer_provider(TracerProvider(resource=resource))
+    tracer = trace.get_tracer(__name__)
+
+    otlp_exporter = OTLPSpanExporter(
+        endpoint="otel-collector:4317", insecure=True
     )
-    trace.get_tracer_provider().add_span_processor(
-        BatchExportSpanProcessor(trace_exporter)
-    )
+
+    span_processor = BatchSpanProcessor(otlp_exporter)
+
+    trace.get_tracer_provider().add_span_processor(span_processor)
+
     FastAPIInstrumentor.instrument_app(app)
+
     SQLAlchemyInstrumentor().instrument(engine=engine)
 else:
     pass

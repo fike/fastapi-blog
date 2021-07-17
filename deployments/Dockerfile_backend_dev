@@ -12,7 +12,8 @@ ENV ENVIRONMENT=${ENVIRONMENT} \
     POETRY_VERSION=1.1.5 \
     PYTHONPATH=/opt/blog/backend
 
-RUN pip install "poetry==${POETRY_VERSION}"
+RUN apt install -y libpq-dev &&\
+    pip install "poetry==${POETRY_VERSION}"
 
 WORKDIR /opt/blog/backend
 

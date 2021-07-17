@@ -10,7 +10,7 @@ from app.db.base import Base
 from app.db.session import SessionLocal
 from app.main import app
 
-engine = create_engine(  # noqa
+engine = create_engine(  
     settings.TEST_SQLALCHEMY_DATABASE_URI, pool_pre_ping=True
 )
 TestingSessionLocal = sessionmaker(

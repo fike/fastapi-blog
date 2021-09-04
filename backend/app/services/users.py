@@ -44,7 +44,6 @@ def update_user(db: Session, user: str, username: str):
     new_password = user_data["password"]
     if new_password:
         password = security.get_hash_password(user_data["password"])
-        print(password)
         setattr(db_user, "hashed_password", password)
     setattr(db_user, "username", user_data["username"])
     setattr(db_user, "profile", user_data["profile"])

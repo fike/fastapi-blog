@@ -88,10 +88,8 @@ export default function Blog({mdxSource, frontMatter }) {
 }
 
 export async function getStaticPaths() {
-  const url = "http://backend:8000/posts";
-  // const data = await getPosts(url);
   const data = await getAllPosts();
-  // console.log(data1)
+
   return {
     paths: data.map((p) => ({
       params: {

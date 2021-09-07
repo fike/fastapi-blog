@@ -6,23 +6,26 @@ from datetime import datetime
 
 import requests
 from opentelemetry import trace
-from opentelemetry.exporter import jaeger
+from opentelemetry.exporter.otlp.proto.grpc.trace_exporter import (
+    OTLPSpanExporter,
+)
 from opentelemetry.instrumentation.requests import RequestsInstrumentor
+from opentelemetry.sdk.resources import Resource
 from opentelemetry.sdk.trace import TracerProvider
-from opentelemetry.sdk.trace.export import BatchExportSpanProcessor
+from opentelemetry.sdk.trace.export import BatchSpanProcessor
 
-trace.set_tracer_provider(TracerProvider())
-tracer = trace.get_tracer_provider().get_tracer(__name__)
+resource = Resource(attributes={"service.name": "fastapi-blog-client"})
 
-trace_exporter = jaeger.JaegerSpanExporter(
-    service_name="fastapi-blog-client",
-    agent_host_name="localhost",
-    agent_port=6831,
-)
-trace.get_tracer_provider().add_span_processor(
-    BatchExportSpanProcessor(trace_exporter)
+trace.set_tracer_provider(TracerProvider(resource=resource))
+tracer = trace.get_tracer(__name__)
+
+otlp_exporter = OTLPSpanExporter(
+    endpoint="http://localhost:4317", insecure=True
 )
 
+span_processor = BatchSpanProcessor(otlp_exporter)
+
+trace.get_tracer_provider().add_span_processor(span_processor)
 
 URLBASE = "http://localhost:8000/"
 
@@ -116,7 +119,7 @@ def get_token(username, password):
 
 create_users()
 
-for y in range(1, 100):
+for y in range(1, 200):
     for i in data_user_template:
         time.sleep(1)
         headers = {}

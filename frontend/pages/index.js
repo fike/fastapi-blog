@@ -58,7 +58,7 @@ export default function Blog({ posts }) {
             {BlogPosts.map((frontMatter) => (
               <BlogPost key={frontMatter.title} {...frontMatter} />
             ))}
-            
+
               <Flex>
                 <Box>
                 <ArrowBackIcon w={6} h={6} color="red.500" />
@@ -72,7 +72,7 @@ export default function Blog({ posts }) {
                   align="center"
                 >
                   {ListPages}
-                </Text> 
+                </Text>
                 </Box>
                 <Box px={100}>
                 <ArrowForwardIcon w={6} h={6} color="red.500" />
@@ -80,7 +80,7 @@ export default function Blog({ posts }) {
                 </Box>
 
               </Flex>
-            
+
           </Flex>
         </Stack>
       </Container>

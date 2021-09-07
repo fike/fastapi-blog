@@ -25,12 +25,13 @@ import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons';
 
 export default function Blog({ posts }) {
   const BlogPosts = posts['items'];
+  console.log(posts['total']);
   // console.log(posts['total']);
   const totalItems = posts['total'];
   const pageSize = 50;
   const TotalPages = Math.trunc(totalItems / pageSize);
   const ListPages = [...Array(TotalPages + 1).keys()];
-  // console.log(ListPages)
+  // console.log(ListPages);
   return (
     <>
       <Head>

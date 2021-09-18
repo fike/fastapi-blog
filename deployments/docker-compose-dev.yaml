@@ -1,4 +1,4 @@
-version: "3.8"
+version: "3.9"
 services:
   db-fapi-blog:
     environment:
@@ -36,6 +36,7 @@ services:
   frontend:
     build:
       context: ../
+      network: deployments_dev
       dockerfile: deployments/Dockerfile_frontend_dev
       args:
         ENVIRONMENT: development

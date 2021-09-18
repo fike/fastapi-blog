@@ -89,7 +89,7 @@ export default function Blog({ posts }) {
 }
 
 export async function getStaticProps() {
-  const posts = await getPosts('http://backend:8000/posts?page=0&size=50');
-
+  // const posts = await getPosts('http://backend:8000/posts?page=0&size=50');
+  const posts = await getPosts(`${process.env.BACKEND_URI}/posts?page=0&size=50`);
   return { props: { posts } };
 }

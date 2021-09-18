@@ -3,19 +3,20 @@ module.exports = {
     BACKEND_URI: 'http://backend:8000'
   },
   webpack: (config, { isServer }) => {
-    // Fixes npm packages that depend on `fs` module
-    // without this we get
-    // ./node_modules/@babel/core/lib/transformation/normalize-file.js:9:0
-    // Module not found: Can't resolve 'fs'
-    // null
-    // as a result of next-mdx-remote
-    // ref: https://coderberry.com/posts/mdx_next
+
     if (!isServer) {
-      config.node = {
-        fs: "empty",
-      };
+      // don't resolve 'fs' module on the client to prevent this error on build --> Error: Can't resolve 'fs'
+      config.resolve.fallback = {
+        // fs: false
+        fs: false,
+        path: false,
+        child_process: false, 
+        crypto: false,
+        os: false,
+        tty: false
+      }
     }
 
     return config;
-  },
+  }
 };

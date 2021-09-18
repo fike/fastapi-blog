@@ -9,6 +9,7 @@ import {
   Avatar,
 } from "@chakra-ui/react";
 import hydrate from "next-mdx-remote/hydrate";
+// import { MDXRemote } from "next-mdx-remote"
 
 import { getAllPosts, getPostBySlug, getPosts } from "../lib/getPosts";
 import MDXComponents from "../components/MDXComponents";
@@ -82,6 +83,8 @@ export default function Blog({mdxSource, frontMatter }) {
 
         </Flex>
         {content}
+
+        {/* <MDXRemote {...mdxSource} components={ MDXComponents }/> */}
       </Stack>
     </Container>
   );

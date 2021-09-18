@@ -10,12 +10,13 @@ DC_APP_DEV := docker-compose-dev.yaml
 
 DC_APP_TEST := docker-compose-test.yaml
 
-export DOCKER_BUILDKIT := true
-export COMPOSE_DOCKER_CLI_BUILD=true
+export DOCKER_BUILDKIT := false
+export COMPOSE_DOCKER_CLI_BUILD := false
 
 
 dev-up:
-	$(DC_EXEC) -f $(DC_DIR)/$(DC_APP_DEV) up -d --remove-orphans --build
+	$(DC_EXEC) -f $(DC_DIR)/$(DC_APP_DEV) up -d --remove-orphans --build backend db-fapi-blog jaeger-all-in-one zipkin-all-in-one
+	$(DC_EXEC) -f $(DC_DIR)/$(DC_APP_DEV) up -d --remove-orphans --build frontend
 	$(DC_EXEC) -f $(DC_DIR)/$(DC_APP_DEV) logs -f
 
 dev-down:

@@ -33,11 +33,11 @@ export async function getAllPosts() {
     const respPostsJson = await responsePosts.json();
     const posts = respPostsJson['items']
     posts.forEach(element => allPosts.push(element));
-  
+
     page++
 
   };
-  
+
   return allPosts
 }
 
@@ -79,4 +79,3 @@ export async function getPostBySlug(slug) {
   }
 
 }
-

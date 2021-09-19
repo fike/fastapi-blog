@@ -5,4 +5,3 @@ export function formatDate(date) {
     const date_fmt = date_input.toLocaleDateString(undefined, options);
     return date_fmt
   }
-  

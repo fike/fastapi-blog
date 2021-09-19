@@ -10,7 +10,7 @@ module.exports = {
         // fs: false
         fs: false,
         path: false,
-        child_process: false, 
+        child_process: false,
         crypto: false,
         os: false,
         tty: false

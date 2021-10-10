@@ -16,7 +16,7 @@ export COMPOSE_DOCKER_CLI_BUILD := false
 
 dev-up:
 	$(DC_EXEC) -f $(DC_DIR)/$(DC_APP_DEV) up -d --remove-orphans --build backend db-fapi-blog jaeger-all-in-one zipkin-all-in-one
-	$(DC_EXEC) -f $(DC_DIR)/$(DC_APP_DEV) up -d --remove-orphans --build frontend
+	$(DC_EXEC) -f $(DC_DIR)/$(DC_APP_DEV) up -d --remove-orphans --build frontend otel-collector
 	$(DC_EXEC) -f $(DC_DIR)/$(DC_APP_DEV) logs -f
 
 dev-down:

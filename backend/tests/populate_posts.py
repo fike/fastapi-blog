@@ -164,7 +164,9 @@ for y in range(1, 200):
             )
         )
         resp = requests.post(url, data=post_req, headers=headers)
-        print(resp.text)
+        print(headers)
+        # print(resp.text)
+        print(resp.headers)
         assert resp.status_code == 201
 
 RequestsInstrumentor().instrument()

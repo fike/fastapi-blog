@@ -27,6 +27,7 @@ app.add_middleware(
 
 
 otel_trace: Any = environ.get("OTELE_TRACE")
+print(otel_trace)
 
 if otel_trace == "True":  # pragma: no cover
     from opentelemetry import trace

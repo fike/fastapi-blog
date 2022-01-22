@@ -20,7 +20,7 @@
     "**/htmlcov/**",
     "**/tests/**",
     "**/frontend/**",
-    "**Makefile**"
+    "**/Makefile**"
   ],
   "horusecCliFilterPath": "",
   "horusecCliHeaders": {},

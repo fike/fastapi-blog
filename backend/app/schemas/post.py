@@ -22,9 +22,9 @@ class PostCreate(PostBase):
     @validator("summary")
     def validate_summary(cls: Any, summary: str, **kwargs: Any) -> Any:
         if len(summary) == 0:
-            raise ValueError("Title can't be empty")
+            raise ValueError("Summary can't be empty")
         elif len(summary) > 200:
-            raise ValueError("Title is too long")
+            raise ValueError("Summary is too long")
         return summary
 
     @validator("body")

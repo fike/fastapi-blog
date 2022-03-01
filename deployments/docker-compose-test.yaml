@@ -17,12 +17,15 @@ services:
       args:
         ENVIRONMENT: development
     volumes:
-      - $PWD:/opt/blog/backend
+      - $PWD/backend:/opt/blog/backend
     depends_on:
       - db-test
     environment:
       - ENVIRONMENT=testing
       - OTELE_TRACE=False
+      - SQLALCHEMY_DATABASE_URI=postgresql://test:test@db-test:5432/test_app
+      - SECRET_KEY=c4af88af61391658010bd80e6fcb923f3fab38f53a4ece6d963a0c3c2d1e463b
+      - ORIGINS=*
     networks:
       - test
     restart: always

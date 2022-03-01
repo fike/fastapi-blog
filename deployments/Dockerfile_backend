@@ -18,9 +18,9 @@ RUN apt update && \
 
 WORKDIR /opt/blog/backend
 
-COPY poetry.lock /opt/blog/backend/
+COPY backend/poetry.lock /opt/blog/backend/
 
-COPY pyproject.toml /opt/blog/backend/
+COPY backend/pyproject.toml /opt/blog/backend/
 
 COPY deployments/entrypoints/fapi-init.sh /opt/blog/backend/
 

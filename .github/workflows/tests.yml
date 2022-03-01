@@ -42,4 +42,4 @@ jobs:
           ORIGINS: ${{ secrets.ORIGIN }}
           TEST_SQLALCHEMY_DATABASE_URI: ${{ secrets.TEST_SQLALCHEMY_DATABASE_URI }}
         run: |
-          make test-local
+          make test-app

@@ -13,7 +13,6 @@ DC_APP_TEST := docker-compose-test.yaml
 export DOCKER_BUILDKIT := false
 export COMPOSE_DOCKER_CLI_BUILD := false
 
-
 dev-up:
 	$(DC_EXEC) -f $(DC_DIR)/$(DC_APP_DEV) up -d --remove-orphans --build backend db-fapi-blog jaeger-all-in-one zipkin-all-in-one
 	$(DC_EXEC) -f $(DC_DIR)/$(DC_APP_DEV) up -d --remove-orphans --build frontend otel-collector
@@ -58,9 +57,6 @@ pre-commit:
 	cd backend &&  \
 	poetry run pre-commit run -a --show-diff-on-failure
 
-test-commons:
-export SQLALCHEMY_DATABASE_URI := postgresql://test:test@localhost:5433/test_app
-
 test-populate:
 	opentelemetry-instrument backend/tests/populate_posts.py
 
@@ -70,8 +66,11 @@ test-db-up:
 test-down:
 	$(DC_EXEC) -f $(DC_DIR)/$(DC_APP_TEST) down --remove-orphans -v
 
-test-app:
-	$(DC_EXEC) -f $(DC_DIR)/$(DC_APP_DEV) up --remove-orphans -d backend
+test-app: test-down test-db-up
+	$(DC_EXEC) -f $(DC_DIR)/$(DC_APP_TEST) run -w /opt/blog/backend --entrypoint "poetry run coverage run -m pytest -vv" backend
+	$(DC_EXEC) -f $(DC_DIR)/$(DC_APP_TEST) run -w /opt/blog/backend --entrypoint "poetry run coverage report" backend
+	$(DC_EXEC) -f $(DC_DIR)/$(DC_APP_TEST) run -w /opt/blog/backend --entrypoint "poetry run coverage xml" backend
+	$(DC_EXEC) -f $(DC_DIR)/$(DC_APP_TEST) run -w /opt/blog/backend --entrypoint "poetry run coverage html" backend
 
 test-local: test-down clean test-db-up
 	sleep 3

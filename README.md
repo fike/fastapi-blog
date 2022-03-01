@@ -41,7 +41,7 @@ This repo is instrumented by OpenTelemtry and export metric to Jaeger that start
 To run tests will up a PostgreSQL container and expose 5433 port to populate. The report will write in `htmlcov` dir.
 
 ```bash
-make test-local
+make test-app
 ```
 
 ### Run and watch on the Jaeger things breaking

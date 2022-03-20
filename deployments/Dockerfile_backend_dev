@@ -1,4 +1,4 @@
-FROM python:3.9
+FROM python:3.10
 
 ARG ENVIRONMENT
 
@@ -24,6 +24,7 @@ COPY backend/pyproject.toml /opt/blog/backend/
 COPY deployments/entrypoints/fapi-init.sh /usr/local/bin/fapi-init.sh
 
 RUN poetry config virtualenvs.create false &&\
+    poetry config experimental.new-installer false &&\
     poetry install $(test ${ENVIRONMENT} = "production" && echo "--no-dev") --no-interaction --no-ansi
 
 COPY backend /opt/blog/backend

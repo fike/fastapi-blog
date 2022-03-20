@@ -33,9 +33,8 @@ dev-db-start:
 dev-logs:
 	$(DC_EXEC) -f $(DC_DIR)/$(DC_APP) logs -f
 
-backend-up: db-up
-	$(DC_EXEC) -f $(DC_DIR)/$(DC_APP_DEV) kill backend
-	$(DC_EXEC) -f $(DC_DIR)/$(DC_APP_DEV) up --remove-orphans -d backend
+backend-up: clean db-up
+	$(DC_EXEC) -f $(DC_DIR)/$(DC_APP_DEV) up --remove-orphans -d backend jaeger-all-in-one zipkin-all-in-one otel-collector
 	$(DC_EXEC) -f $(DC_DIR)/$(DC_APP_DEV) logs -f
 
 clean:

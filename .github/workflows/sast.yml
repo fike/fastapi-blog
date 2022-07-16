@@ -1,16 +1,16 @@
-# name: Horusec Scan
+name: Horusec Scan
 
-# on: [push]
+on: [push]
 
-# jobs:
-#   checking_code:
-#     runs-on: ubuntu-latest
-#     name: Horusec Scan
-#     steps:
-#       - uses: actions/checkout@v3
+jobs:
+  checking_code:
+    runs-on: ubuntu-latest
+    name: Horusec Scan
+    steps:
+      - uses: actions/checkout@v3
 
-#       - name: Run Horusec
-#         id: run_horusec
-#         uses: fike/horusec-action@v0.2.1
-#         with:
-#           arguments: -c=horusec-config.json -p .
+      - name: Run Horusec
+        id: run_horusec
+        uses: fike/horusec-action@v0.2.1
+        with:
+          arguments: -c=horusec-config.json -p .

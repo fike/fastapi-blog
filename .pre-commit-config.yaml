@@ -16,10 +16,10 @@ repos:
       exclude: deployments, tests, frontend
 
 - repo: https://github.com/psf/black
-  rev: 20.8b1
+  rev: 22.6.0
   hooks:
     - id: black
-      language_version: python3.9
+      language_version: python3.10
       exclude: deployments, tests, frontend
 
 - repo: https://gitlab.com/pycqa/flake8

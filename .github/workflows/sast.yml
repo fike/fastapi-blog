@@ -11,6 +11,6 @@ jobs:
 
       - name: Run Horusec
         id: run_horusec
-        uses: fike/horusec-action@v0.2.1
+        uses: fike/horusec-action@v0.2.2
         with:
-          arguments: -c=horusec-config.json -p .
+          arguments: -c=horusec-config.json -p ./

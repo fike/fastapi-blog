@@ -4,8 +4,7 @@ from typing import Any, List, Optional
 from fastapi import Depends, HTTPException, Response, status
 from fastapi.routing import APIRouter
 from fastapi.security import OAuth2PasswordRequestForm
-from fastapi_pagination import Page, pagination_params
-from fastapi_pagination.api import response
+from fastapi_pagination import Page
 from fastapi_pagination.ext.sqlalchemy import paginate
 from sqlalchemy.orm import Session
 
@@ -37,15 +36,11 @@ router: Any = APIRouter(
     status_code=status.HTTP_201_CREATED,
     summary="Create a user",
 )
-def create_new_user(
-    user: schemas.UserCreate, db: Session = Depends(get_db)
-) -> Any:
+def create_new_user(user: schemas.UserCreate, db: Session = Depends(get_db)) -> Any:
     db_username = get_user_by_username(db, username=user.username)
     db_email = get_user_by_email(db, email=user.email)
     if db_username:
-        raise HTTPException(
-            status_code=400, detail="Username already registered"
-        )
+        raise HTTPException(status_code=400, detail="Username already registered")
     elif db_email:
         raise HTTPException(status_code=400, detail="Email already registered")
     return create_user(db=db, user=user)
@@ -54,7 +49,6 @@ def create_new_user(
 @router.get(
     "/users",
     response_model=Page[schemas.Users],
-    dependencies=[Depends(pagination_params)],
 )
 def list_users(db: Session = Depends(get_db)) -> List:
     """
@@ -118,7 +112,6 @@ def login_for_access_token(
 @router.get(
     "/users/me/posts",
     response_model=Page[schemas.Posts],
-    dependencies=[Depends(pagination_params)],
 )
 def read_own_posts(
     current_user: schemas.User = Depends(get_current_active_user),

@@ -5,7 +5,7 @@ services:
      - POSTGRES_USER=fapi_blog
      - POSTGRES_PASSWORD=fapi_pass
      - POSTGRES_DB=fapi_blog
-    image: postgres:13
+    image: postgres:17
     volumes:
       - db-data:/var/lib/postgresql/data
     networks:

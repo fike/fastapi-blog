@@ -1,8 +1,6 @@
 from typing import Any, Optional
 
-from pydantic import BaseModel, StrictBool, validator
-
-from app.db.session import Base
+from pydantic import BaseModel, ConfigDict, StrictBool, field_validator
 
 
 class UserBase(BaseModel):
@@ -15,20 +13,20 @@ class UserBase(BaseModel):
 class UserCreate(UserBase):
     password: str
 
-    @validator("username")
-    def validate_username(cls: Any, username: str, **kwargs: Any) -> Any:
+    @field_validator("username")
+    def validate_username(cls: Any, username: str) -> Any:
         if len(username) <= 4:
             raise ValueError("Username can't be empty")
         return username
 
-    @validator("email")
-    def validate_email(cls: Any, email: str, **kwargs: Any) -> Any:
+    @field_validator("email")
+    def validate_email(cls: Any, email: str) -> Any:
         if len(email) == 0:
             raise ValueError("An email is required")
         return email
 
-    @validator("profile")
-    def validate_profile(cls: any, profile: str, **kwargs: Any) -> Any:
+    @field_validator("profile")
+    def validate_profile(cls: Any, profile: str) -> Any:
         if len(profile) == 0:
             raise ValueError("A profile is required")
         return profile
@@ -37,8 +35,7 @@ class UserCreate(UserBase):
 class User(UserBase):
     id: Optional[int] = None
 
-    class Config:
-        orm_mode: bool = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class UserInDB(User):
@@ -50,10 +47,9 @@ class Users(User):
 
 
 class UserUpdate(UserBase):
-    password: Optional[str]
+    password: Optional[str] = None
 
-    class Config:
-        orm_mode: bool = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class UserPassword(BaseModel):

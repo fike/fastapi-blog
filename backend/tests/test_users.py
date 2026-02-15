@@ -57,9 +57,7 @@ client = TestClient(app)
         ("a", "A user profile Profile", "a@test.org", False, "apass", 422),
     ),
 )
-def test_create_user(
-    username, profile, email, disabled, password, status, request
-):
+def test_create_user(username, profile, email, disabled, password, status, request):
     response = client.post(
         "/users",
         json={
@@ -178,9 +176,7 @@ def test_posts_by_user(username, status):
         ),
     ),
 )
-def test_update_user(
-    path, username, profile, email, disabled, password, status
-):
+def test_update_user(path, username, profile, email, disabled, password, status):
     headers = {}
     req_time = timedelta(minutes=30)
     data = {"sub": username}

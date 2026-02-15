@@ -7,24 +7,11 @@ repos:
     - id: check-yaml
     - id: check-added-large-files
 
-- repo: https://github.com/pycqa/isort
-  rev: 5.13.2
+- repo: https://github.com/astral-sh/ruff-pre-commit
+  rev: v0.9.6
   hooks:
-    - id: isort
-      files: ^backend/
-      args: [-v, --profile, black, --filter-files, backend/]
+    - id: ruff
+      args: [--fix, --exit-non-zero-on-fix]
       exclude: deployments, tests, frontend
-
-- repo: https://github.com/psf/black
-  rev: 24.10.0
-  hooks:
-    - id: black
-      language_version: python3.13
-      exclude: deployments, tests, frontend
-
-- repo: https://github.com/pycqa/flake8
-  rev: 6.1.0
-  hooks:
-    - id: flake8
-      args: [--config=backend/.flake8, backend]
+    - id: ruff-format
       exclude: deployments, tests, frontend

@@ -1,30 +1,17 @@
 repos:
 - repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: v3.2.0
+  rev: v4.6.0
   hooks:
     - id: trailing-whitespace
     - id: end-of-file-fixer
     - id: check-yaml
     - id: check-added-large-files
 
-- repo: https://github.com/pycqa/isort
-  rev: 5.7.0
+- repo: https://github.com/astral-sh/ruff-pre-commit
+  rev: v0.9.6
   hooks:
-    - id: isort
-      files: ^backend/
-      args: [-v, --profile, black, --filter-files, backend/]
+    - id: ruff
+      args: [--fix, --exit-non-zero-on-fix]
       exclude: deployments, tests, frontend
-
-- repo: https://github.com/psf/black
-  rev: 22.6.0
-  hooks:
-    - id: black
-      language_version: python3.10
-      exclude: deployments, tests, frontend
-
-- repo: https://gitlab.com/pycqa/flake8
-  rev: 3.8.4
-  hooks:
-    - id: flake8
-      args: [--config=backend/.flake8, backend]
+    - id: ruff-format
       exclude: deployments, tests, frontend

@@ -11,9 +11,9 @@ from app import models, schemas
 def create_post(
     db: Session, post: schemas.PostCreate, current_user: schemas.User
 ) -> Any:
-    post_data = post.dict()
+    post_data = post.model_dump()
     post_data["slug"] = slugify(post_data["title"])
-    user_data = schemas.User.from_orm(current_user).dict()
+    user_data = schemas.User.model_validate(current_user).model_dump()
     post_data["author_id"] = user_data["id"]
     post_data["published_at"] = datetime.now()
     db_post = models.Post(**post_data)
@@ -40,13 +40,15 @@ def get_posts_by_userid(db: Session, user_id: int) -> list:
 
 
 def count_posts(db: Session) -> int:
-    total = db.query(models.Post).count()
+    from sqlalchemy import func, select
+
+    total = db.scalar(select(func.count(models.Post.id)))
     return total
 
 
-def update_post(db: Session, post: str, slug: str) -> Any:
+def update_post(db: Session, post: schemas.PostUpdate, slug: str) -> Any:
     db_post = get_post(db, slug)
-    post_data: dict = post.dict()
+    post_data: dict = post.model_dump()
     setattr(db_post, "title", post_data["title"])
     setattr(db_post, "slug", slugify(post_data["title"]))
     setattr(db_post, "summary", post_data["summary"])

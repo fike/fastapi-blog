@@ -10,7 +10,7 @@ It's a FastAPI implementation as the backend for a blog system. This project's a
 ## Dependencies
 
 * Poetry
-* SQLAlmechy
+* SQLAlchemy
 * Alembic for migrations
 * OpenTelemtry for instrumentation
 * Docker

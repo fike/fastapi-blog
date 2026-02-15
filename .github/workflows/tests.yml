@@ -8,8 +8,7 @@ jobs:
     strategy:
       matrix:
         include:
-          - python-version: "3.9"
-          - python-version: "3.10"
+          - python-version: "3.13"
     steps:
       - uses: actions/checkout@v3
 
@@ -32,10 +31,15 @@ jobs:
           restore-keys: |
             poetry-${{ hashFiles('**/poetry.lock') }}
 
+      - name: Install Docker Compose
+        run: |
+          sudo curl -L "https://github.com/docker/compose/releases/download/v2.24.7/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+          sudo chmod +x /usr/local/bin/docker-compose
+
       - name: Install dependencies
         working-directory: ./backend
         run: |
-          poetry install --no-interaction --no-ansi
+          poetry install --no-interaction --no-ansi --no-root
 
       - name: Run tests
         env:

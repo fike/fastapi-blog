@@ -5,7 +5,7 @@ services:
      - POSTGRES_USER=test
      - POSTGRES_PASSWORD=test
      - POSTGRES_DB=test_app
-    image: postgres:13
+    image: postgres:17
     networks:
       - test
     ports:

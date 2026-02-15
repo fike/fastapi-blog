@@ -16,19 +16,16 @@ def get_user_by_id(db: Session, user_id: int) -> Any:
 
 
 def get_user_by_username(db: Session, username: str) -> Any:
-    return (
-        db.query(models.User).filter(models.User.username == username).first()
-    )
+    return db.query(models.User).filter(models.User.username == username).first()
 
 
-def get_users(db: Session) -> list:
-    users = db.query(models.User)
-    return users
+def get_users(db: Session):
+    return db.query(models.User)
 
 
 def create_user(db: Session, user: schemas.UserCreate):
     hashed_password = security.get_hash_password(user.password)
-    user_data = user.dict()
+    user_data = user.model_dump()
     del user_data["password"]
     user_data["hashed_password"] = hashed_password
     user_post = models.User(**user_data)
@@ -38,10 +35,10 @@ def create_user(db: Session, user: schemas.UserCreate):
     return user_post
 
 
-def update_user(db: Session, user: str, username: str):
+def update_user(db: Session, user: schemas.UserUpdate, username: str):
     db_user = get_user_by_username(db=db, username=username)
-    user_data = user.dict()
-    new_password = user_data["password"]
+    user_data = user.model_dump()
+    new_password = user_data.get("password")
     if new_password:
         password = security.get_hash_password(user_data["password"])
         setattr(db_user, "hashed_password", password)

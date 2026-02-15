@@ -57,7 +57,6 @@ def read_slug(slug: str, db: Session = Depends(get_db)) -> Any:
 @router.get(
     "/posts",
     response_model=Page[schemas.Posts],
-
 )
 def list_posts(
     response: Response,
@@ -104,7 +103,9 @@ def update_user_post(
     return req_post
 
 
-@router.delete("/posts/{slug}", status_code=HTTPStatus.NO_CONTENT, response_model=None)
+@router.delete(
+    "/posts/{slug}", status_code=HTTPStatus.NO_CONTENT, response_model=None
+)
 def post_delete(
     slug: str,
     db: Session = Depends(get_db),

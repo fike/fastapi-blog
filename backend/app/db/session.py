@@ -1,8 +1,7 @@
 from typing import Any
 
 from sqlalchemy import create_engine, engine
-from sqlalchemy.orm import declarative_base
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import declarative_base, sessionmaker
 
 from app.config import settings
 

@@ -41,6 +41,7 @@ def get_posts_by_userid(db: Session, user_id: int) -> list:
 
 def count_posts(db: Session) -> int:
     from sqlalchemy import func, select
+
     total = db.scalar(select(func.count(models.Post.id)))
     return total
 

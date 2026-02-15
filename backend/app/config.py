@@ -11,9 +11,7 @@ class Settings(BaseSettings):
     ORIGINS: Optional[str] = None
     TEST_SQLALCHEMY_DATABASE_URI: Optional[AnyUrl] = None
 
-    model_config = {
-        "env_file": ".env"
-    }
+    model_config = {"env_file": ".env"}
 
 
 settings: Any = Settings()

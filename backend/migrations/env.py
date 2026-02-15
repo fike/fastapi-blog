@@ -31,7 +31,7 @@ target_metadata = Base.metadata
 def get_url():
     from app.config import settings
 
-    database_uri = settings.SQLALCHEMY_DATABASE_URI
+    database_uri = str(settings.SQLALCHEMY_DATABASE_URI)
 
     return database_uri
 

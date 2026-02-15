@@ -1,18 +1,19 @@
 from typing import Any, Optional
 
-from pydantic import PostgresDsn
-from pydantic.env_settings import BaseSettings
+from pydantic import AnyUrl
+from pydantic_settings import BaseSettings
 from starlette.config import Config
 
 
 class Settings(BaseSettings):
-    SQLALCHEMY_DATABASE_URI: Optional[PostgresDsn]
-    SECRET_KEY: Optional[str]
-    ORIGINS: Optional[str]
-    TEST_SQLALCHEMY_DATABASE_URI: Optional[PostgresDsn]
+    SQLALCHEMY_DATABASE_URI: Optional[AnyUrl] = None
+    SECRET_KEY: Optional[str] = None
+    ORIGINS: Optional[str] = None
+    TEST_SQLALCHEMY_DATABASE_URI: Optional[AnyUrl] = None
 
-    class Config:
-        env_file = ".env"
+    model_config = {
+        "env_file": ".env"
+    }
 
 
 settings: Any = Settings()

@@ -6,36 +6,38 @@ authors = ["Fernando Ike"]
 license = "MIT"
 
 [tool.poetry.dependencies]
-python = "^3.9"
-alembic = "^1.4.3"
-fastapi = ">=0.65.2"
-uvicorn = "^0.13.3"
-psycopg2 = "^2.8.6"
-opentelemetry-exporter-jaeger = "^1.10.0"
-fastapi-pagination = "^0.5.2"
-python-slugify = "^4.0.1"
+python = "^3.13"
+alembic = "^1.14.0"
+fastapi = "^0.129.0"
+httpx = "^0.28.0"
+uvicorn = "^0.40.0"
+psycopg2-binary = "^2.9.11"
+
+fastapi-pagination = "^0.15.0"
+python-slugify = "^8.0.0"
 passlib = "^1.7.4"
-python-jose = "^3.2.0"
-python-multipart = "^0.0.5"
-pydantic = {extras = ["dotenv"], version = "^1.8.1"}
-SQLAlchemy = "^1.4.23"
-opentelemetry-exporter-otlp = "^1.10.0"
-opentelemetry-api = "^1.10.0"
-opentelemetry-sdk = "^1.10.0"
-opentelemetry-instrumentation-requests = "^0.29b0"
-opentelemetry-instrumentation-fastapi = "^0.29b0"
-opentelemetry-instrumentation-sqlalchemy = "^0.29b0"
+python-jose = "^3.3.0"
+python-multipart = "^0.0.22"
+pydantic = {extras = ["dotenv"], version = "^2.10.0"}
+pydantic-settings = "^2.10.0"
+SQLAlchemy = "^2.0.0"
+opentelemetry-exporter-otlp = "^1.39.0"
+opentelemetry-api = "^1.39.0"
+opentelemetry-sdk = "^1.39.0"
+opentelemetry-instrumentation-requests = "^0.60b0"
+opentelemetry-instrumentation-fastapi = "^0.60b0"
+opentelemetry-instrumentation-sqlalchemy = "^0.60b0"
 
 
-[tool.poetry.dev-dependencies]
+[tool.poetry.group.dev.dependencies]
 autopep8 = "^1.5.5"
 coverage = "^5.3.1"
 pytest = "^6.2.1"
 pytest-order = "^0.9.5"
-pylint = "^2.6.0"
+pylint = "^3.0.0"
 flake8 = "^3.8.4"
 requests = "^2.25.1"
-black = "^20.8b1"
+black = "^24.0.0"
 pre-commit = "^2.8.2"
 
 
@@ -45,7 +47,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.black]
 line-length = 79
-target-version = ['py37', 'py38']
+target-version = ['py39', 'py310', 'py311', 'py312', 'py313']
 include = '\.pyi?$'
 exclude = '''
 /(

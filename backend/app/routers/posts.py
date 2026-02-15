@@ -2,7 +2,7 @@ from http import HTTPStatus
 from typing import Any, Optional
 
 from fastapi import APIRouter, Depends, HTTPException, Response, status
-from fastapi_pagination import Page, add_pagination
+from fastapi_pagination import Page
 from fastapi_pagination.ext.sqlalchemy import paginate
 from sqlalchemy.orm import Session
 
@@ -103,9 +103,7 @@ def update_user_post(
     return req_post
 
 
-@router.delete(
-    "/posts/{slug}", status_code=HTTPStatus.NO_CONTENT, response_model=None
-)
+@router.delete("/posts/{slug}", status_code=HTTPStatus.NO_CONTENT, response_model=None)
 def post_delete(
     slug: str,
     db: Session = Depends(get_db),

@@ -9,3 +9,19 @@ from .user import (
     Users,
     UserUpdate,
 )
+
+__all__ = [
+    "PostCreate",
+    "PostInDB",
+    "Posts",
+    "PostUpdate",
+    "Token",
+    "TokenData",
+    "User",
+    "UserBase",
+    "UserCreate",
+    "UserInDB",
+    "UserPassword",
+    "Users",
+    "UserUpdate",
+]

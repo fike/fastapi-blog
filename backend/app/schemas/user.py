@@ -2,8 +2,6 @@ from typing import Any, Optional
 
 from pydantic import BaseModel, ConfigDict, StrictBool, field_validator
 
-from app.db.session import Base
-
 
 class UserBase(BaseModel):
     username: str

@@ -4,7 +4,7 @@ from typing import Any, List, Optional
 from fastapi import Depends, HTTPException, Response, status
 from fastapi.routing import APIRouter
 from fastapi.security import OAuth2PasswordRequestForm
-from fastapi_pagination import Page, add_pagination
+from fastapi_pagination import Page
 from fastapi_pagination.ext.sqlalchemy import paginate
 from sqlalchemy.orm import Session
 
@@ -36,15 +36,11 @@ router: Any = APIRouter(
     status_code=status.HTTP_201_CREATED,
     summary="Create a user",
 )
-def create_new_user(
-    user: schemas.UserCreate, db: Session = Depends(get_db)
-) -> Any:
+def create_new_user(user: schemas.UserCreate, db: Session = Depends(get_db)) -> Any:
     db_username = get_user_by_username(db, username=user.username)
     db_email = get_user_by_email(db, email=user.email)
     if db_username:
-        raise HTTPException(
-            status_code=400, detail="Username already registered"
-        )
+        raise HTTPException(status_code=400, detail="Username already registered")
     elif db_email:
         raise HTTPException(status_code=400, detail="Email already registered")
     return create_user(db=db, user=user)

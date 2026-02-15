@@ -29,9 +29,7 @@ def get_current_user(
         headers={"WWW-Authenticate": "Bearer"},
     )
     try:
-        payload = jwt.decode(
-            token, settings.SECRET_KEY, algorithms=[ALGORITHM]
-        )
+        payload = jwt.decode(token, settings.SECRET_KEY, algorithms=[ALGORITHM])
         username: str = payload.get("sub")
         token_data = schemas.TokenData(username=username)
     except JWTError:  # pragma: no cover

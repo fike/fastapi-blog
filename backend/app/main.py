@@ -5,7 +5,6 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi_pagination import add_pagination
 
-from app.config import settings
 from app.routers import users
 
 from .db.session import engine
@@ -47,9 +46,7 @@ if otel_trace == "True":  # pragma: no cover
     trace.set_tracer_provider(TracerProvider(resource=resource))
     tracer = trace.get_tracer(__name__)
 
-    otlp_exporter = OTLPSpanExporter(
-        endpoint="otel-collector:4317", insecure=True
-    )
+    otlp_exporter = OTLPSpanExporter(endpoint="otel-collector:4317", insecure=True)
 
     span_processor = BatchSpanProcessor(otlp_exporter)
 

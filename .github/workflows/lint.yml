@@ -35,7 +35,7 @@ jobs:
       - name: Install dependencies
         working-directory: ./backend
         run: |
-          poetry install --no-interaction --no-ansi
+          poetry install --no-interaction --no-ansi --no-root
 
       - name: Lint
         working-directory: ./backend

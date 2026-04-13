@@ -32,7 +32,7 @@ opentelemetry-instrumentation-sqlalchemy = "^0.60b0"
 [tool.poetry.group.dev.dependencies]
 autopep8 = "^1.5.5"
 coverage = "^5.3.1"
-pytest = "^6.2.1"
+pytest = "^9.0.3"
 pytest-order = "^0.9.5"
 pylint = "^3.0.0"
 ruff = "^0.9.6"

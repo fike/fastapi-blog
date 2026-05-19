@@ -1,0 +1,7 @@
+{
+  "database": "dolt",
+  "backend": "dolt",
+  "dolt_mode": "embedded",
+  "dolt_database": "fastapi_blog",
+  "project_id": "6b27d602-9231-4154-93c6-5a0f8628bb43"
+}

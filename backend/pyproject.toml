@@ -37,7 +37,7 @@ pytest-order = "^0.9.5"
 pylint = "^3.0.0"
 ruff = "^0.9.6"
 requests = "^2.33.0"
-black = "^24.0.0"
+black = "^26.3.1"
 pre-commit = "^2.8.2"
 
 

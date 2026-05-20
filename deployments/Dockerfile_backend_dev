@@ -9,22 +9,24 @@ ENV ENVIRONMENT=${ENVIRONMENT} \
     PIP_NO_CACHE_DIR=off \
     PIP_DISABLE_PIP_VERSION_CHECK=on \
     PIP_DEFAULT_TIMEOUT=100 \
-    POETRY_VERSION=2.0.0 \
+    POETRY_VERSION=2.1.1 \
     PYTHONPATH=/opt/blog/backend
 
-RUN apt install -y libpq-dev &&\
+RUN apt update && \
+    apt install -y libpq-dev gcc g++ curl && \
+    pip install -U pip setuptools && \
     pip install "poetry==${POETRY_VERSION}"
 
 WORKDIR /opt/blog/backend
 
-COPY backend/poetry.lock /opt/blog/backend/
+COPY backend/requirements.txt /opt/blog/backend/
 
-COPY backend/pyproject.toml /opt/blog/backend/
+RUN pip install -r requirements.txt
 
+COPY backend/poetry.lock backend/pyproject.toml /opt/blog/backend/
 COPY deployments/entrypoints/fapi-init.sh /usr/local/bin/fapi-init.sh
 
-RUN poetry config virtualenvs.create false &&\
-    poetry install --no-root $(test ${ENVIRONMENT} = "production" && echo "--no-dev") --no-interaction --no-ansi
+RUN poetry config virtualenvs.create false
 
 COPY backend /opt/blog/backend
 

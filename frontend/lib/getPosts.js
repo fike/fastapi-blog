@@ -1,10 +1,11 @@
 import fetch from "isomorphic-fetch"
-import mdxPrism from 'mdx-prism'
-// import { serialize } from "next-mdx-remote/serialize";
-import renderToString from 'next-mdx-remote/render-to-string'
+import { serialize } from 'next-mdx-remote/serialize'
 import readingTime from 'reading-time'
 
-import MDXComponents from '../components/MDXComponents'
+import remarkGfm from 'remark-gfm'
+import rehypeSlug from 'rehype-slug'
+import rehypeAutolinkHeadings from 'rehype-autolink-headings'
+import rehypePrismPlus from 'rehype-prism-plus'
 
 const ITEMS_PAGE = 20
 
@@ -55,16 +56,15 @@ export async function getPostBySlug(slug) {
   const RespJsonUser = await response_user.json()
   data['user'] = RespJsonUser['username']
 
-  // const mdxSource = await serialize(content)
-  const mdxSource = await renderToString(content, {
-    components: MDXComponents,
+  const mdxSource = await serialize(content, {
     mdxOptions: {
-      remarkPlugins: [
-        require('remark-autolink-headings'),
-        require('remark-slug'),
-        require('remark-code-titles'),
+      remarkPlugins: [remarkGfm],
+      rehypePlugins: [
+        rehypeSlug,
+        [rehypeAutolinkHeadings, { behavior: 'wrap' }],
+        [rehypePrismPlus, { ignoreMissing: true }]
       ],
-      rehypePlugins: [mdxPrism]
+      format: 'mdx'
     }
   })
 

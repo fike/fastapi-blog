@@ -8,8 +8,7 @@ import {
   Stack,
   Avatar,
 } from "@chakra-ui/react";
-import hydrate from "next-mdx-remote/hydrate";
-// import { MDXRemote } from "next-mdx-remote"
+import { MDXRemote } from "next-mdx-remote"
 
 import { getAllPosts, getPostBySlug, getPosts } from "../lib/getPosts";
 import MDXComponents from "../components/MDXComponents";
@@ -19,9 +18,6 @@ import { formatDate } from "../lib/formatDate";
 
 export default function Blog({mdxSource, frontMatter }) {
 
-  const content = hydrate(mdxSource, {
-    components: MDXComponents,
-  });
   const { colorMode } = useColorMode();
   const textColor = {
     light: "gray.700",
@@ -82,9 +78,8 @@ export default function Blog({mdxSource, frontMatter }) {
           </Flex>
 
         </Flex>
-        {content}
 
-        {/* <MDXRemote {...mdxSource} components={ MDXComponents }/> */}
+        <MDXRemote {...mdxSource} components={ MDXComponents }/>
       </Stack>
     </Container>
   );

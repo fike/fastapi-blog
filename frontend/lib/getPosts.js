@@ -76,6 +76,6 @@ export async function getPostBySlug(slug) {
       slug: slug || null,
       ...data
     }
-  }
+  };
 
 }

@@ -6,7 +6,7 @@ Specialized agent for containerization, local environment orchestration, CI/CD p
 
 - **Docker & Docker Compose**: Multi-stage builds, networking, and service orchestration for dev, test, and prod.
 - **Makefile Automation**: Task orchestration and developer workflow simplification.
-- **GitHub Actions**: Automated testing, linting, SAST (Horusec), and security analysis pipelines.
+- **GitHub Actions**: Automated testing, linting, SLSA provenance, and security analysis pipelines.
 - **Linux Administration**: Shell scripting, permissions, and entrypoint optimization.
 
 ## 🛠 Project Standards

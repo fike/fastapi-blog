@@ -90,30 +90,6 @@ files = [
 ]
 
 [[package]]
-name = "atomicwrites"
-version = "1.4.1"
-description = "Atomic file writes."
-optional = false
-python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
-groups = ["dev"]
-markers = "sys_platform == \"win32\""
-files = [
-    {file = "atomicwrites-1.4.1.tar.gz", hash = "sha256:81b2c9071a49367a7f770170e5eec8cb66567cfbbc8c73d20ce5ca4a8d71cf11"},
-]
-
-[[package]]
-name = "attrs"
-version = "26.1.0"
-description = "Classes Without Boilerplate"
-optional = false
-python-versions = ">=3.9"
-groups = ["dev"]
-files = [
-    {file = "attrs-26.1.0-py3-none-any.whl", hash = "sha256:c647aa4a12dfbad9333ca4e71fe62ddc36f4e63b2d260a37a8b83d2f043ac309"},
-    {file = "attrs-26.1.0.tar.gz", hash = "sha256:d03ceb89cb322a8fd706d4fb91940737b6642aa36998fe130a9bc96c985eff32"},
-]
-
-[[package]]
 name = "autopep8"
 version = "1.7.0"
 description = "A tool that automatically formats Python code to conform to the PEP 8 style guide"
@@ -1455,18 +1431,6 @@ files = [
 ]
 
 [[package]]
-name = "py"
-version = "1.11.0"
-description = "library with cross-python path, ini-parsing, io, code, log facilities"
-optional = false
-python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
-groups = ["dev"]
-files = [
-    {file = "py-1.11.0-py2.py3-none-any.whl", hash = "sha256:607c53218732647dff4acdfcd50cb62615cedf612e72d1724fb1a0cc6405b378"},
-    {file = "py-1.11.0.tar.gz", hash = "sha256:51c75c4126074b472f746a24399ad32f6053d1b34b68d2fa41e558e6f4a98719"},
-]
-
-[[package]]
 name = "pyasn1"
 version = "0.6.3"
 description = "Pure-Python implementation of ASN.1 types and DER/BER/CER codecs (X.208)"
@@ -1670,6 +1634,21 @@ toml = ["tomli (>=2.0.1)"]
 yaml = ["pyyaml (>=6.0.1)"]
 
 [[package]]
+name = "pygments"
+version = "2.20.0"
+description = "Pygments is a syntax highlighting package written in Python."
+optional = false
+python-versions = ">=3.9"
+groups = ["dev"]
+files = [
+    {file = "pygments-2.20.0-py3-none-any.whl", hash = "sha256:81a9e26dd42fd28a23a2d169d86d7ac03b46e2f8b59ed4698fb4785f946d0176"},
+    {file = "pygments-2.20.0.tar.gz", hash = "sha256:6757cd03768053ff99f3039c1a36d6c0aa0b263438fcab17520b30a303a82b5f"},
+]
+
+[package.extras]
+windows-terminal = ["colorama (>=0.4.6)"]
+
+[[package]]
 name = "pylint"
 version = "3.3.9"
 description = "python code static checker"
@@ -1696,28 +1675,25 @@ testutils = ["gitpython (>3)"]
 
 [[package]]
 name = "pytest"
-version = "6.2.5"
+version = "9.0.3"
 description = "pytest: simple powerful testing with Python"
 optional = false
-python-versions = ">=3.6"
+python-versions = ">=3.10"
 groups = ["dev"]
 files = [
-    {file = "pytest-6.2.5-py3-none-any.whl", hash = "sha256:7310f8d27bc79ced999e760ca304d69f6ba6c6649c0b60fb0e04a4a77cacc134"},
-    {file = "pytest-6.2.5.tar.gz", hash = "sha256:131b36680866a76e6781d13f101efb86cf674ebb9762eb70d3082b6f29889e89"},
+    {file = "pytest-9.0.3-py3-none-any.whl", hash = "sha256:2c5efc453d45394fdd706ade797c0a81091eccd1d6e4bccfcd476e2b8e0ab5d9"},
+    {file = "pytest-9.0.3.tar.gz", hash = "sha256:b86ada508af81d19edeb213c681b1d48246c1a91d304c6c81a427674c17eb91c"},
 ]
 
 [package.dependencies]
-atomicwrites = {version = ">=1.0", markers = "sys_platform == \"win32\""}
-attrs = ">=19.2.0"
-colorama = {version = "*", markers = "sys_platform == \"win32\""}
-iniconfig = "*"
-packaging = "*"
-pluggy = ">=0.12,<2.0"
-py = ">=1.8.2"
-toml = "*"
+colorama = {version = ">=0.4", markers = "sys_platform == \"win32\""}
+iniconfig = ">=1.0.1"
+packaging = ">=22"
+pluggy = ">=1.5,<2"
+pygments = ">=2.7.2"
 
 [package.extras]
-testing = ["argcomplete", "hypothesis (>=3.56)", "mock", "nose", "requests", "xmlschema"]
+dev = ["argcomplete", "attrs (>=19.2)", "hypothesis (>=3.56)", "mock", "requests", "setuptools", "xmlschema"]
 
 [[package]]
 name = "pytest-order"
@@ -2389,4 +2365,4 @@ type = ["pytest-mypy (>=1.0.1) ; platform_python_implementation != \"PyPy\""]
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.13"
-content-hash = "da8afe9fe1723ff4a608eb838c27e29386a0edeee93085b195060ecd31fb3d4a"
+content-hash = "40dd4f19eba12ac9bb2cdf32c73a3a84cc4238c452a26eed5e40740a415cb1ec"

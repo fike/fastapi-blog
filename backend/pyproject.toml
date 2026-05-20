@@ -39,6 +39,7 @@ ruff = "^0.9.6"
 requests = "^2.33.0"
 black = "^26.3.1"
 pre-commit = "^4.1.0"
+virtualenv = "^21.3.3"
 
 
 [build-system]

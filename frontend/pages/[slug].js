@@ -78,7 +78,7 @@ export default function Blog({mdxSource, frontMatter }) {
           </Flex>
 
         </Flex>
-        
+
         <MDXRemote {...mdxSource} components={ MDXComponents }/>
       </Stack>
     </Container>

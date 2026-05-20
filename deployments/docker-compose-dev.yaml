@@ -37,7 +37,6 @@ services:
   frontend:
     build:
       context: ../
-      network: deployments_dev
       dockerfile: deployments/Dockerfile_frontend_dev
       args:
         ENVIRONMENT: development

@@ -2,7 +2,13 @@ module.exports = {
   env: {
     BACKEND_URI: 'http://backend:8000'
   },
+  // Silence Turbopack warning for Webpack-only features
+  turbopack: {},
   webpack: (config, { isServer }) => {
+    config.module.rules.push({
+      test: /\.svg$/,
+      use: ["@svgr/webpack"]
+    });
 
     if (!isServer) {
       // don't resolve 'fs' module on the client to prevent this error on build --> Error: Can't resolve 'fs'

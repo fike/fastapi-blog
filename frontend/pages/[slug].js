@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import Head from "next/head";
 import {
-  useColorMode,
   Heading,
   Text,
   Flex,
   Stack,
   Avatar,
 } from "@chakra-ui/react";
+import { useColorMode } from "../components/ui/color-mode";
 import { MDXRemote } from "next-mdx-remote"
 
 import { getAllPosts, getPostBySlug, getPosts } from "../lib/getPosts";

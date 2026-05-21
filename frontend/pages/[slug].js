@@ -33,7 +33,7 @@ export default function Blog({mdxSource, frontMatter }) {
       </Head>
       <Stack
         as="article"
-        spacing={8}
+        gap={8}
         justifyContent="center"
         alignItems="flex-start"
         m="0 auto 4rem auto"

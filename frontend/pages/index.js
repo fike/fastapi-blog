@@ -80,6 +80,6 @@ export default function Blog({ posts }) {
 }
 
 export async function getStaticProps() {
-  const posts = await getPosts(`${process.env.BACKEND_URI}/posts?page=0&size=50`);
+  const posts = await getPosts(`${process.env.BACKEND_URI}/posts?page=1&size=50`);
   return { props: { posts } };
 }

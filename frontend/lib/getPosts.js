@@ -11,7 +11,7 @@ const ITEMS_PAGE = 20
 
 
 export async function getPosts() {
-  const response = await fetch(`${process.env.BACKEND_URI}/posts`);
+  const response = await fetch(`${process.env.BACKEND_URI}/posts?page=1&size=50`);
   const respJson = await response.json();
   const posts = respJson;
 
@@ -21,23 +21,19 @@ export async function getPosts() {
 export async function getAllPosts() {
 
   const pageSize = 50
-  const response = await fetch(`${process.env.BACKEND_URI}/posts?page=0&size=1`)
+  const response = await fetch(`${process.env.BACKEND_URI}/posts?page=1&size=1`)
   const respJson = await response.json()
   const totalItems = respJson['total']
-  const TotalPages = Math.trunc(totalItems / pageSize)
+  const totalPages = Math.ceil(totalItems / pageSize)
 
   const allPosts = []
-  let page = 0;
-
-  while ( page <= TotalPages ) {
-    const responsePosts = await fetch(process.env.BACKEND_URI + "/posts?" + "page=" + page + "&size=" + pageSize);
+  
+  for (let page = 1; page <= totalPages; page++) {
+    const responsePosts = await fetch(`${process.env.BACKEND_URI}/posts?page=${page}&size=${pageSize}`);
     const respPostsJson = await responsePosts.json();
     const posts = respPostsJson['items']
     posts.forEach(element => allPosts.push(element));
-
-    page++
-
-  };
+  }
 
   return allPosts
 }

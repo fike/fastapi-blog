@@ -1,2 +1,4 @@
 {"id":"int-c3b412f0","kind":"field_change","created_at":"2026-05-20T22:03:41.228384Z","actor":"Fernando Ike","issue_id":"fastapi-blog-b5t","extra":{"field":"status","new_value":"closed","old_value":"open","reason":"Closed"}}
 {"id":"int-0732b7c4","kind":"field_change","created_at":"2026-05-20T22:03:46.792756Z","actor":"Fernando Ike","issue_id":"fastapi-blog-5kk","extra":{"field":"status","new_value":"closed","old_value":"open","reason":"Closed"}}
+{"id":"int-5917552a","kind":"field_change","created_at":"2026-05-21T14:56:24.79948Z","actor":"Fernando Ike","issue_id":"fastapi-blog-m8o","extra":{"field":"status","new_value":"closed","old_value":"open","reason":"Closed"}}
+{"id":"int-8168bf16","kind":"field_change","created_at":"2026-05-21T14:56:30.588916Z","actor":"Fernando Ike","issue_id":"fastapi-blog-wfk","extra":{"field":"status","new_value":"closed","old_value":"open","reason":"Closed"}}

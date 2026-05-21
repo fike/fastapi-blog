@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import Head from "next/head";
 import {
-  useColorMode,
   Heading,
   Text,
   Flex,
   Stack,
-  Avatar,
 } from "@chakra-ui/react";
+import { useColorMode } from "../components/ui/color-mode";
+import { Avatar } from "../components/ui/avatar";
 import { MDXRemote } from "next-mdx-remote"
 
 import { getAllPosts, getPostBySlug, getPosts } from "../lib/getPosts";
@@ -63,7 +63,6 @@ export default function Blog({mdxSource, frontMatter }) {
               <Avatar
                 size="xs"
                 name={frontMatter.user}
-                // src="../images/portrait.jpeg"
                 mr={2}
               />
               <Text fontSize="sm" color={textColor[colorMode]}>

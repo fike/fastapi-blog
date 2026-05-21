@@ -27,7 +27,7 @@ export async function getAllPosts() {
   const totalPages = Math.ceil(totalItems / pageSize)
 
   const allPosts = []
-  
+
   for (let page = 1; page <= totalPages; page++) {
     const responsePosts = await fetch(`${process.env.BACKEND_URI}/posts?page=${page}&size=${pageSize}`);
     const respPostsJson = await responsePosts.json();

@@ -1,4 +1,3 @@
-
 import {
   Box,
   Alert,
@@ -6,10 +5,9 @@ import {
   Heading,
   Link,
   Text,
-  Divider,
-  useColorMode,
+  Separator,
 } from "@chakra-ui/react";
-import { jsx } from "@emotion/react";
+import { useColorMode } from "./ui/color-mode";
 import NextLink from "next/link";
 
 const CustomLink = (props) => {
@@ -24,13 +22,13 @@ const CustomLink = (props) => {
 
   if (isInternalLink) {
     return (
-      <NextLink href={href}>
+      <NextLink href={href} passHref legacyBehavior>
         <Link color={color[colorMode]} {...props} />
       </NextLink>
     );
   }
 
-  return <Link color={color[colorMode]} isExternal {...props} />;
+  return <Link color={color[colorMode]} target="_blank" rel="noopener noreferrer" {...props} />;
 };
 
 const Quote = (props) => {
@@ -41,20 +39,25 @@ const Quote = (props) => {
   };
 
   return (
-    <Alert
+    <Alert.Root
       mt={4}
       w="98%"
       bg={bgColor[colorMode]}
-      variant="left-accent"
+      variant="subtle"
       status="info"
-      css={{
-        "> *:first-of-type": {
-          marginTop: 0,
-          marginLeft: 8,
-        },
-      }}
-      {...props}
-    />
+    >
+      <Alert.Indicator />
+      <Alert.Content>
+         <Box
+          css={{
+            "> *:first-of-type": {
+              marginTop: 0,
+            },
+          }}
+          {...props}
+        />
+      </Alert.Content>
+    </Alert.Root>
   );
 };
 
@@ -62,7 +65,6 @@ const DocsHeading = (props) => (
   <Heading
     css={{
       scrollMarginTop: "100px",
-      scrollSnapMargin: "100px", // Safari
       "&[id]": {
         pointerEvents: "none",
       },
@@ -110,7 +112,7 @@ const Hr = () => {
     dark: "gray.600",
   };
 
-  return <Divider borderColor={borderColor[colorMode]} my={4} w="100%" />;
+  return <Separator borderColor={borderColor[colorMode]} my={4} w="100%" />;
 };
 
 const MDXComponents = {
@@ -121,7 +123,7 @@ const MDXComponents = {
   h5: (props) => <DocsHeading as="h5" size="sm" fontWeight="bold" {...props} />,
   h6: (props) => <DocsHeading as="h6" size="xs" fontWeight="bold" {...props} />,
   inlineCode: (props) => (
-    <Code colorScheme="yellow" fontSize="0.84em" {...props} />
+    <Code colorPalette="yellow" fontSize="0.84em" {...props} />
   ),
   br: (props) => <Box height="24px" {...props} />,
   hr: Hr,

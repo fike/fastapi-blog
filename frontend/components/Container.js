@@ -1,7 +1,7 @@
 import React from "react";
-import { useColorMode, Button, Flex, Box } from "@chakra-ui/react";
+import { Button, Flex, Box } from "@chakra-ui/react";
+import { useColorMode } from "./ui/color-mode";
 import NextLink from "next/link";
-import styled from "@emotion/styled";
 
 import DarkModeSwitch from "../components/DarkModeSwitch";
 
@@ -23,18 +23,10 @@ const Container = ({ children }) => {
     dark: "gray.300",
   };
 
-  const StickyNav = styled(Flex)`
-    position: sticky;
-    z-index: 10;
-    top: 0;
-    backdrop-filter: saturate(180%) blur(20px);
-    transition: height 0.5s, line-height 0.5s;
-  `;
-
   return (
     <>
-      <StickyNav
-        flexDirection="row"
+      <Flex
+        direction="row"
         justifyContent="space-between"
         alignItems="center"
         maxWidth="800px"
@@ -47,11 +39,15 @@ const Container = ({ children }) => {
         mt={8}
         mb={[0, 0, 8]}
         mx="auto"
+        position="sticky"
+        zIndex={10}
+        top={0}
+        backdropFilter="saturate(180%) blur(20px)"
+        transition="height 0.5s, line-height 0.5s"
       >
         <Box>
           <NextLink href="/">
             <Button
-              as="a"
               variant="ghost"
               p={[1, 2, 4]}
               _hover={{ backgroundColor: navHoverBg[colorMode] }}
@@ -61,7 +57,6 @@ const Container = ({ children }) => {
           </NextLink>
           <NextLink href="/profile">
             <Button
-              as="a"
               variant="ghost"
               p={[1, 2, 4]}
               _hover={{ backgroundColor: navHoverBg[colorMode] }}
@@ -71,7 +66,6 @@ const Container = ({ children }) => {
           </NextLink>
           <NextLink href="/login">
             <Button
-              as="a"
               variant="ghost"
               p={[1, 2, 4]}
               _hover={{ backgroundColor: navHoverBg[colorMode] }}
@@ -81,7 +75,7 @@ const Container = ({ children }) => {
           </NextLink>
         </Box>
         <DarkModeSwitch />
-      </StickyNav>
+      </Flex>
       <Flex
         as="main"
         justifyContent="center"

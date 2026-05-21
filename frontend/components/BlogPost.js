@@ -1,6 +1,7 @@
 import React from "react";
 import NextLink from "next/link";
-import { useColorMode, Heading, Text, Flex, Box, Link } from "@chakra-ui/react";
+import { Heading, Text, Flex, Box, Link } from "@chakra-ui/react";
+import { useColorMode } from "./ui/color-mode";
 import { formatDate } from "../lib/formatDate";
 
 const BlogPost = ({ title, published_at, summary, slug }) => {
@@ -33,7 +34,7 @@ const BlogPost = ({ title, published_at, summary, slug }) => {
 
             <Text
               color="gray.500"
-              minWidth="140px"
+              minWidth="105px"
               textAlign={["left", "right"]}
               mb={[4, 0]}
             >

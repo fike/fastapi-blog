@@ -1,36 +1,27 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
-import NextLink from "next/link";
 import {
   Heading,
   Flex,
-  Center,
   Stack,
   Box,
-  Input,
-  InputGroup,
-  InputRightElement,
-  Button,
-  HStack,
   Spacer,
-  Icon,
   Text,
 } from '@chakra-ui/react';
 
 import Container from '../components/Container';
-import { getPosts, getAllPosts } from '../lib/getPosts';
+import { getPosts } from '../lib/getPosts';
 import BlogPost from '../components/BlogPost';
 
-import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 export default function Blog({ posts }) {
   const BlogPosts = posts['items'];
-  console.log(posts['total']);
   const totalItems = posts['total'];
   const pageSize = 50;
   const TotalPages = Math.trunc(totalItems / pageSize);
   const ListPages = [...Array(TotalPages + 1).keys()];
-  console.log(ListPages);
+
   return (
     <>
       <Head>
@@ -39,7 +30,7 @@ export default function Blog({ posts }) {
       <Container>
         <Stack
           as="main"
-          spacing={8}
+          gap={8}
           justifyContent="center"
           alignItems="flex-start"
           m="0 auto 4rem auto"
@@ -59,24 +50,24 @@ export default function Blog({ posts }) {
               <BlogPost key={frontMatter.title} {...frontMatter} />
             ))}
 
-              <Flex>
+              <Flex align="center" width="100%" pt={8}>
                 <Box>
-                <ArrowBackIcon w={6} h={6} color="red.500" />
+                  <ChevronLeft size={24} color="red" />
                 </Box>
                 <Spacer />
-                <Box px={200}>
+                <Box>
                 <Text
                   fontSize="sm"
                   color="gray.500"
                   minWidth="100px"
                   align="center"
                 >
-                  {ListPages}
+                  {ListPages.join(', ')}
                 </Text>
                 </Box>
-                <Box px={100}>
-                <ArrowForwardIcon w={6} h={6} color="red.500" />
-
+                <Spacer />
+                <Box>
+                  <ChevronRight size={24} color="red" />
                 </Box>
 
               </Flex>
@@ -89,7 +80,6 @@ export default function Blog({ posts }) {
 }
 
 export async function getStaticProps() {
-  // const posts = await getPosts('http://backend:8000/posts?page=0&size=50');
   const posts = await getPosts(`${process.env.BACKEND_URI}/posts?page=0&size=50`);
   return { props: { posts } };
 }

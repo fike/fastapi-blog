@@ -2,6 +2,8 @@
 
 This file provides instructions and context for AI coding agents working on this project.
 
+For complete agent framework, subagents, skills, and workflow protocols, see **[AGENTS.md](AGENTS.md)**.
+
 <!-- BEGIN BEADS INTEGRATION v:1 profile:minimal hash:7510c1e2 -->
 ## Beads Issue Tracker
 
@@ -50,21 +52,35 @@ bd close <id>         # Complete work
 - If push fails, resolve and retry until it succeeds
 <!-- END BEADS INTEGRATION -->
 
-
 ## Build & Test
 
-_Add your build and test commands here_
-
 ```bash
-# Example:
-# npm install
-# npm test
+# Start development environment
+make dev-up
+
+# Run backend tests with coverage
+make test-app
+
+# Run pre-commit hooks (ruff, black)
+make pre-commit
+
+# Generate Alembic migration
+make migrate
 ```
 
 ## Architecture Overview
 
-_Add a brief overview of your project architecture_
+- **Backend**: FastAPI + SQLAlchemy 2.0 + Pydantic v2 + PostgreSQL
+- **Frontend**: Next.js v12 + React + Chakra UI
+- **Infrastructure**: Docker Compose, GitHub Actions, OpenTelemetry
+- **Observability**: Jaeger, Zipkin, Prometheus via OTLP collector
 
 ## Conventions & Patterns
 
-_Add your project-specific conventions here_
+- Use `async/await` for database operations
+- Keep business logic in `services/`, not in `routers/`
+- Every Model change needs corresponding Schema + Alembic migration
+- Prioritize Chakra UI components over raw CSS
+- Run `make pre-commit` before committing
+- Invoke specialized subagents from `.agents/subagents/` for complex tasks
+- Use skills from `.agents/skills/` for project-specific automation

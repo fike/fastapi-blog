@@ -1,3 +1,12 @@
+---
+name: frontend-specialist
+description: Specialized agent for Next.js components, Chakra UI, responsive design, and frontend architecture. Use when working on UI components, pages, or frontend styling.
+tools: Read, Grep, Glob, Bash(eslint:*, prettier:*)
+model: inherit
+permissionMode: default
+maxTurns: 12
+---
+
 # Frontend Specialist Subagent
 
 Specialized agent for UI/UX development, component architecture, and modern web practices using the Next.js and Chakra UI stack in the **fastapi-blog** project.

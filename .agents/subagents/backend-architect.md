@@ -1,3 +1,12 @@
+---
+name: backend-architect
+description: Specialized agent for FastAPI architecture, SQLAlchemy models, Alembic migrations, and Pydantic schemas. Use when working on backend code, database models, or API endpoints.
+tools: Read, Grep, Glob, Bash(alembic:*, ruff:*, black:*, pytest:*)
+model: inherit
+permissionMode: default
+maxTurns: 12
+---
+
 # Backend Architect Subagent
 
 Specialized agent for architectural design, code consistency, and best practices in the FastAPI/SQLAlchemy/Pydantic stack of the **fastapi-blog** project.

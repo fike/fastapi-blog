@@ -2,44 +2,69 @@
 
 This file and the `.agents/` directory define the operational framework for AI agents interacting with the **fastapi-blog** project.
 
-## 🤖 Framework Structure
+## Framework Structure
 
-- **`.agents/skills/`**: Contains specialized tool definitions, scripts, and executable logic that extend the agent's core capabilities.
-- **`.agents/subagents/`**: Defines specialized agent personas with focused system prompts and tailored toolsets for specific domains (e.g., Backend, Frontend, DevOps).
+- **`.agents/skills/`**: Project-specific automation skills with executable scripts.
+- **`.agents/skills-packages/`**: Agent Skills Open Standard packages (distributable).
+- **`.agents/subagents/`**: Specialized agent personas with restricted tool access.
 
-## 🛠 Project Blueprint
+## Project Blueprint
 
 ### Backend (Python/FastAPI)
-- **Stack**: Python 3.13, Poetry, SQLAlchemy, Alembic, Pydantic.
+- **Stack**: Python 3.13, Poetry, SQLAlchemy 2.0, Alembic, Pydantic v2.
 - **Key Files**: `backend/app/main.py`, `backend/pyproject.toml`.
-- **Database**: PostgreSQL (managed via SQLAlchemy models in `backend/app/models/`).
+- **Models**: `backend/app/models/` — SQLAlchemy entities.
+- **Schemas**: `backend/app/schemas/` — Pydantic DTOs.
+- **Services**: `backend/app/services/` — Business logic.
+- **Routers**: `backend/app/routers/` — API endpoints.
 
 ### Frontend (Next.js/React)
-- **Stack**: React, Next.js, Yarn, Vanilla CSS.
+- **Stack**: React, Next.js (v12), Yarn, Chakra UI, Vanilla CSS.
 - **Key Files**: `frontend/pages/index.js`, `frontend/package.json`.
+- **Linting**: ESLint + Prettier (`frontend/.eslintrc.json`).
 
 ### Infrastructure & Observability
 - **Containerization**: Docker & Docker Compose (`deployments/`).
 - **Telemetry**: OpenTelemetry (OTLP), Jaeger, Zipkin, Prometheus.
+- **CI/CD**: GitHub Actions (`.github/workflows/`).
 
-## 📜 Agent Guidelines
+## Agent Guidelines
 
-1. **Empirical Research**: Before any implementation, use `grep_search` and `read_file` to confirm current logic. Do not rely solely on memory.
+1. **Empirical Research**: Before any implementation, use `grep` and `read_file` to confirm current logic. Do not rely solely on memory.
 2. **Atomic Changes**: Keep PRs and commits focused. One feature or fix per cycle.
-3. **Validation Mandatory**: Every code change must be followed by a verification step (test execution or manual verification script).
-4. **Dependency Management**: Use the provided Docker environments to run commands like `poetry lock` or `npm install` if local tools are missing.
+3. **Validation Mandatory**: Every code change must be followed by a verification step (tests, linters, or manual verification script).
+4. **Dependency Management**: Use Docker environments to run `poetry lock` or `yarn install` if local tools are missing.
+5. **Read-Only Subagents**: Subagents analyze and validate but do not write code. The main agent handles all code modifications.
 
-## 🧩 Custom Skills (Coming Soon)
+## Skills
 
-Custom skills located in `.agents/skills/` allow for project-specific automation:
-- **`migration-check`**: Validates Alembic migration integrity.
-- **`telemetry-verify`**: Checks if OTLP exporters are correctly configured.
+### `.agents/skills/` (Executable Scripts)
+- **`migration-validator`** — Validates Alembic migration integrity (`check_migrations.sh`).
+- **`telemetry-tester`** — Verifies OTLP exporter connectivity (`test_telemetry.sh`).
+- **`dependencies-sync`** — Synchronizes Poetry and Yarn lockfiles (`sync_deps.sh`).
+- **`api-tester`** — Validates API endpoint responses (`test_api.sh`).
+- **`security-scan`** — Runs security hooks and tests (`scan_security.sh`).
 
-## 👥 Subagents (Coming Soon)
+### `.agents/skills-packages/` (Open Standard)
+- **`clean-code-refactorer`** — Refactoring with SOLID/DRY principles.
+- **`xp-copilot`** — TDD and Extreme Programming workflow.
 
-Invoke specialized agents for complex investigations:
-- **`backend-specialist`**: Expert in FastAPI performance and DB schema design.
-- **`frontend-specialist`**: Expert in React state management and responsive design.
+## Subagents
+
+Invoke specialized agents for complex investigations. All subagents have **restricted tool access** (read-only + specific commands):
+
+- **`backend-architect`** — FastAPI architecture, SQLAlchemy models, Alembic migrations.
+- **`frontend-specialist`** — Next.js components, Chakra UI, responsive design.
+- **`devops-infra`** — Docker, Docker Compose, CI/CD pipelines, Makefile automation.
+- **`observability-expert`** — OpenTelemetry, Jaeger, Zipkin, Prometheus.
+- **`fullstack-integrator`** — Cross-cutting changes spanning backend and frontend.
+
+## Verification Commands
+
+```bash
+make pre-commit    # Run ruff, black, and pre-commit hooks on backend
+make test-app      # Run pytest with coverage in Docker test environment
+```
 
 <!-- BEGIN BEADS INTEGRATION v:1 profile:minimal hash:7510c1e2 -->
 ## Beads Issue Tracker

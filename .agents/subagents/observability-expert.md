@@ -1,3 +1,12 @@
+---
+name: observability-expert
+description: Specialized agent for OpenTelemetry, Jaeger, Zipkin, Prometheus, and observability pipeline configuration. Use when troubleshooting traces, metrics, or telemetry setup.
+tools: Read, Grep, Glob, Bash(otel-collector:*)
+model: inherit
+permissionMode: default
+maxTurns: 12
+---
+
 # Observability Expert Subagent
 
 Specialized agent for monitoring, tracing, and metrics management in the **fastapi-blog** project, focusing on OpenTelemetry (OTLP) and the observability stack (Jaeger, Zipkin, Prometheus).

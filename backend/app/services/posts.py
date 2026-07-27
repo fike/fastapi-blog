@@ -49,10 +49,10 @@ def count_posts(db: Session) -> int:
 def update_post(db: Session, post: schemas.PostUpdate, slug: str) -> Any:
     db_post = get_post(db, slug)
     post_data: dict = post.model_dump()
-    setattr(db_post, "title", post_data["title"])
-    setattr(db_post, "slug", slugify(post_data["title"]))
-    setattr(db_post, "summary", post_data["summary"])
-    setattr(db_post, "body", post_data["body"])
+    db_post.title = post_data["title"]
+    db_post.slug = slugify(post_data["title"])
+    db_post.summary = post_data["summary"]
+    db_post.body = post_data["body"]
 
     db.commit()
     db.refresh(db_post)

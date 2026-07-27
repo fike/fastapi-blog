@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import Any, Optional
+from typing import Any
 
 from pydantic import BaseModel, ConfigDict, field_validator
 
@@ -38,10 +38,10 @@ class PostInDB(PostBase):
     title: str
     body: str
     summary: str
-    id: Optional[int] = None
-    published_at: Optional[datetime] = None
-    slug: Optional[str] = None
-    author_id: Optional[int] = None
+    id: int | None = None
+    published_at: datetime | None = None
+    slug: str | None = None
+    author_id: int | None = None
 
     model_config = ConfigDict(from_attributes=True)
 

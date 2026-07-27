@@ -7,38 +7,38 @@ license = "MIT"
 
 [tool.poetry.dependencies]
 python = "^3.13"
-alembic = "^1.14.0"
-fastapi = ">=0.136.1"
+alembic = "^1.18.0"
+fastapi = "^0.140.0"
 httpx = "^0.28.0"
-uvicorn = "^0.40.0"
+uvicorn = "^0.51.0"
 psycopg2-binary = "^2.9.11"
 
-fastapi-pagination = "^0.15.0"
+fastapi-pagination = "^0.15.15"
 python-slugify = "^8.0.0"
 passlib = "^1.7.4"
 python-jose = "^3.3.0"
-python-multipart = "^0.0.27"
+python-multipart = "^0.0.32"
 pydantic = ">=2.10.0"
-pydantic-settings = ">=2.7.0"
-SQLAlchemy = "^2.0.0"
-opentelemetry-exporter-otlp = "^1.39.0"
-opentelemetry-api = "^1.39.0"
-opentelemetry-sdk = "^1.39.0"
-opentelemetry-instrumentation-requests = "^0.60b0"
-opentelemetry-instrumentation-fastapi = "^0.60b0"
-opentelemetry-instrumentation-sqlalchemy = "^0.60b0"
+pydantic-settings = "^2.14.0"
+SQLAlchemy = "^2.0.51"
+opentelemetry-exporter-otlp = "^1.44.0"
+opentelemetry-api = "^1.44.0"
+opentelemetry-sdk = "^1.44.0"
+opentelemetry-instrumentation-requests = "^0.65b0"
+opentelemetry-instrumentation-fastapi = "^0.65b0"
+opentelemetry-instrumentation-sqlalchemy = "^0.65b0"
 
 
 [tool.poetry.group.dev.dependencies]
-autopep8 = "^1.5.5"
-coverage = "^5.3.1"
-pytest = ">=8.0.0"
-pytest-order = "^0.9.5"
-pylint = "^3.0.0"
-ruff = "^0.9.6"
+autopep8 = "^2.3.0"
+coverage = "^7.15.0"
+pytest = "^9.1.0"
+pytest-order = "^1.5.0"
+pylint = "^4.0.0"
+ruff = "^0.16.0"
 requests = "^2.33.0"
 black = "^26.3.1"
-pre-commit = "^4.6.0"
+pre-commit = "^4.6.1"
 virtualenv = "^21.3.3"
 
 
@@ -48,7 +48,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.black]
 line-length = 79
-target-version = ['py39', 'py310', 'py311', 'py312', 'py313']
+target-version = ['py313']
 include = '\.pyi?$'
 exclude = '''
 /(
@@ -77,3 +77,13 @@ line_length = 79
 profile = "black"
 multi_line_output = 3
 known_third_party = ["alembic", "fastapi", "fastapi_pagination", "jose", "opentelemetry", "passlib", "pydantic", "pytest", "requests", "slugify", "sqlalchemy", "starlette"]
+
+[tool.ruff]
+line-length = 79
+
+[tool.ruff.lint]
+extend-select = ["E", "F", "W", "I", "UP", "B", "DTZ", "RUF", "EXE"]
+ignore = ["B008", "EXE002", "DTZ005"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["B008"]

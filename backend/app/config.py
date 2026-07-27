@@ -1,4 +1,4 @@
-from typing import Any, Optional
+from typing import Any
 
 from pydantic import AnyUrl
 from pydantic_settings import BaseSettings
@@ -6,10 +6,10 @@ from starlette.config import Config
 
 
 class Settings(BaseSettings):
-    SQLALCHEMY_DATABASE_URI: Optional[AnyUrl] = None
-    SECRET_KEY: Optional[str] = None
-    ORIGINS: Optional[str] = None
-    TEST_SQLALCHEMY_DATABASE_URI: Optional[AnyUrl] = None
+    SQLALCHEMY_DATABASE_URI: AnyUrl | None = None
+    SECRET_KEY: str | None = None
+    ORIGINS: str | None = None
+    TEST_SQLALCHEMY_DATABASE_URI: AnyUrl | None = None
 
     model_config = {"env_file": ".env"}
 

@@ -86,4 +86,4 @@ extend-select = ["E", "F", "W", "I", "UP", "B", "DTZ", "RUF", "EXE"]
 ignore = ["B008", "EXE002", "DTZ005"]
 
 [tool.ruff.lint.per-file-ignores]
-"tests/**" = ["B008"]
+"tests/**" = ["B008", "EXE002", "DTZ005", "C418", "BLE001"]

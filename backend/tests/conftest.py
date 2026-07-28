@@ -1,4 +1,4 @@
-from typing import Generator
+from collections.abc import Generator
 
 import pytest
 from fastapi.testclient import TestClient
@@ -13,7 +13,9 @@ from app.main import app
 engine = create_engine(  # noqa
     str(settings.SQLALCHEMY_DATABASE_URI), pool_pre_ping=True
 )
-TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+TestingSessionLocal = sessionmaker(
+    autocommit=False, autoflush=False, bind=engine
+)
 Base.metadata.create_all(bind=engine)
 
 

@@ -54,7 +54,7 @@ pluggy==1.6.0
 pre_commit==4.6.1
 protobuf==6.33.6
 psycopg2-binary==2.9.12
-pyasn1==0.6.3
+pyasn1==0.6.4
 pycodestyle==2.14.0
 pydantic==2.13.4
 pydantic-settings==2.14.1

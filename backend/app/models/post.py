@@ -17,4 +17,6 @@ class Post(Base):
     title: str = Column(String(100), index=True, nullable=False)
     summary: str = Column(String(240), index=False, nullable=False)
     body: str = Column(String, index=False, nullable=False)
-    published_at: datetime = Column(TIMESTAMP(timezone=True), default=datetime.now())
+    published_at: datetime = Column(
+        TIMESTAMP(timezone=True), default=datetime.now()
+    )

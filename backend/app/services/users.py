@@ -16,7 +16,9 @@ def get_user_by_id(db: Session, user_id: int) -> Any:
 
 
 def get_user_by_username(db: Session, username: str) -> Any:
-    return db.query(models.User).filter(models.User.username == username).first()
+    return (
+        db.query(models.User).filter(models.User.username == username).first()
+    )
 
 
 def get_users(db: Session):
@@ -41,11 +43,11 @@ def update_user(db: Session, user: schemas.UserUpdate, username: str):
     new_password = user_data.get("password")
     if new_password:
         password = security.get_hash_password(user_data["password"])
-        setattr(db_user, "hashed_password", password)
-    setattr(db_user, "username", user_data["username"])
-    setattr(db_user, "profile", user_data["profile"])
-    setattr(db_user, "email", user_data["email"])
-    setattr(db_user, "disabled", user_data["disabled"])
+        db_user.hashed_password = password
+    db_user.username = user_data["username"]
+    db_user.profile = user_data["profile"]
+    db_user.email = user_data["email"]
+    db_user.disabled = user_data["disabled"]
 
     db.commit()
     db.refresh(db_user)

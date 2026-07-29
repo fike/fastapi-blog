@@ -1,4 +1,4 @@
-from typing import Any, Optional
+from typing import Any
 
 from pydantic import BaseModel, ConfigDict, StrictBool, field_validator
 
@@ -33,7 +33,7 @@ class UserCreate(UserBase):
 
 
 class User(UserBase):
-    id: Optional[int] = None
+    id: int | None = None
 
     model_config = ConfigDict(from_attributes=True)
 
@@ -47,11 +47,11 @@ class Users(User):
 
 
 class UserUpdate(UserBase):
-    password: Optional[str] = None
+    password: str | None = None
 
     model_config = ConfigDict(from_attributes=True)
 
 
 class UserPassword(BaseModel):
-    password: Optional[str] = None
+    password: str | None = None
     # pass

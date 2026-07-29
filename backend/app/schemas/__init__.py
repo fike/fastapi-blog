@@ -13,8 +13,8 @@ from .user import (
 __all__ = [
     "PostCreate",
     "PostInDB",
-    "Posts",
     "PostUpdate",
+    "Posts",
     "Token",
     "TokenData",
     "User",
@@ -22,6 +22,6 @@ __all__ = [
     "UserCreate",
     "UserInDB",
     "UserPassword",
-    "Users",
     "UserUpdate",
+    "Users",
 ]

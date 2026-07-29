@@ -19,7 +19,9 @@ resource = Resource(attributes={"service.name": "fastapi-blog-client"})
 trace.set_tracer_provider(TracerProvider(resource=resource))
 tracer = trace.get_tracer(__name__)
 
-otlp_exporter = OTLPSpanExporter(endpoint="http://localhost:4317", insecure=True)
+otlp_exporter = OTLPSpanExporter(
+    endpoint="http://localhost:4317", insecure=True
+)
 
 span_processor = BatchSpanProcessor(otlp_exporter)
 
@@ -117,7 +119,7 @@ def get_token(username, password):
 
 create_users()
 
-for y in range(1, 200):
+for _ in range(1, 200):
     for i in data_user_template:
         time.sleep(1)
         headers = {}

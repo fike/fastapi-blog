@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from typing import Any, Optional
+from typing import Any
 
 from fastapi import APIRouter, Depends, HTTPException, Response, status
 from fastapi_pagination import Page
@@ -61,7 +61,7 @@ def read_slug(slug: str, db: Session = Depends(get_db)) -> Any:
 def list_posts(
     response: Response,
     db: Session = Depends(get_db),
-    user_id: Optional[int] = None,
+    user_id: int | None = None,
 ) -> Any:
     """
     List all post published
@@ -103,7 +103,11 @@ def update_user_post(
     return req_post
 
 
-@router.delete("/posts/{slug}", status_code=HTTPStatus.NO_CONTENT, response_model=None)
+@router.delete(
+    "/posts/{slug}",
+    status_code=HTTPStatus.NO_CONTENT,
+    response_model=None,
+)
 def post_delete(
     slug: str,
     db: Session = Depends(get_db),

@@ -24,7 +24,7 @@ jobs:
           pip install -U poetry
 
       - name: Cache Poetry virtualenv
-        uses: actions/cache@v5
+        uses: actions/cache@v6
         id: cache
         with:
           path: ~/.virtualenvs

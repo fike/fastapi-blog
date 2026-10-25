@@ -6,7 +6,7 @@ asgiref==3.11.1
 astroid==4.0.4
 autopep8==2.3.2
 black==26.5.1
-certifi==2026.5.20
+certifi==2026.10.19
 cfgv==3.5.0
 charset-normalizer==3.4.7
 click==8.4.0

@@ -16,7 +16,7 @@ distlib==0.4.0
 ecdsa==0.19.2
 fastapi==0.140.0
 fastapi-pagination==0.15.15
-filelock==3.29.0
+filelock==4.2.1
 googleapis-common-protos==1.75.0
 greenlet==3.5.1
 grpcio==1.80.0
